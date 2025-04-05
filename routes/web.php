@@ -14,6 +14,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 });
 
+// Test route
 Route::get('loan', [LoanController::class, 'index'])->name('loan');
 
 require __DIR__ . '/settings.php';
