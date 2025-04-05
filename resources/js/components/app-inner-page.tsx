@@ -1,4 +1,4 @@
-const AppInnerPage = (props: any) => {
+const AppInnerPage = (props) => {
     return (
         <>
             <div className="row">
