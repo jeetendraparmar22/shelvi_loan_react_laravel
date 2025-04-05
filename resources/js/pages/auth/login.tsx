@@ -7,13 +7,13 @@ type LoginForm = {
     remember: boolean;
 };
 
-interface LoginProps {
-    status?: string;
-    canResetPassword: boolean;
-}
+// interface LoginProps {
+//     status?: string;
+//     canResetPassword: boolean;
+// }
 
 export default function Login() {
-    const { data, setData, post, processing, errors, reset } = useForm<Required<LoginForm>>({
+    const { setData, post, processing, errors, reset } = useForm<Required<LoginForm>>({
         email: '',
         password: '',
         remember: false,
@@ -22,6 +22,11 @@ export default function Login() {
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
         post(route('login'), {
+            onError: (errors) => {
+                if (Object.keys(errors).length > 0) {
+                    alert(errors.email || errors.password || 'Invalid Credentials');
+                }
+            },
             onFinish: () => reset('password'),
         });
     };
