@@ -1,19 +1,7 @@
-import { Breadcrumbs } from '@/components/breadcrumbs';
-import { Icon } from '@/components/icon';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Button } from '@/components/ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { NavigationMenu, NavigationMenuItem, NavigationMenuList, navigationMenuTriggerStyle } from '@/components/ui/navigation-menu';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { UserMenuContent } from '@/components/user-menu-content';
 import { useInitials } from '@/hooks/use-initials';
-import { cn } from '@/lib/utils';
 import { type BreadcrumbItem, type NavItem, type SharedData } from '@/types';
-import { Link, usePage } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Menu, Search } from 'lucide-react';
-import AppLogo from './app-logo';
-import AppLogoIcon from './app-logo-icon';
+import { usePage } from '@inertiajs/react';
+import { BookOpen, Folder, LayoutGrid } from 'lucide-react';
 
 const mainNavItems: NavItem[] = [
     {
@@ -48,135 +36,343 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
     const getInitials = useInitials();
     return (
         <>
-            <div className="border-sidebar-border/80 border-b">
-                <div className="mx-auto flex h-16 items-center px-4 md:max-w-7xl">
-                    {/* Mobile Menu */}
-                    <div className="lg:hidden">
-                        <Sheet>
-                            <SheetTrigger asChild>
-                                <Button variant="ghost" size="icon" className="mr-2 h-[34px] w-[34px]">
-                                    <Menu className="h-5 w-5" />
-                                </Button>
-                            </SheetTrigger>
-                            <SheetContent side="left" className="bg-sidebar flex h-full w-64 flex-col items-stretch justify-between">
-                                <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-                                <SheetHeader className="flex justify-start text-left">
-                                    <AppLogoIcon className="h-6 w-6 fill-current text-black dark:text-white" />
-                                </SheetHeader>
-                                <div className="flex h-full flex-1 flex-col space-y-4 p-4">
-                                    <div className="flex h-full flex-col justify-between text-sm">
-                                        <div className="flex flex-col space-y-4">
-                                            {mainNavItems.map((item) => (
-                                                <Link key={item.title} href={item.href} className="flex items-center space-x-2 font-medium">
-                                                    {item.icon && <Icon iconNode={item.icon} className="h-5 w-5" />}
-                                                    <span>{item.title}</span>
-                                                </Link>
-                                            ))}
+            <header id="page-topbar">
+                <div className="layout-width">
+                    <div className="navbar-header">
+                        <div className="d-flex">
+                            {/* LOGO */}
+                            <div className="navbar-brand-box horizontal-logo">
+                                <a href="index.html" className="logo logo-light">
+                                    <span className="logo-sm">
+                                        <img src="assets/images/logo-sm.png" alt="" height={22} />
+                                    </span>
+                                    <span className="logo-lg">
+                                        {/* <img src="assets/images/logo-light.png" alt height="17"> */}
+                                        <h6>Travel Portal</h6>
+                                    </span>
+                                </a>
+                            </div>
+                            <button
+                                type="button"
+                                className="btn btn-sm fs-16 header-item vertical-menu-btn topnav-hamburger px-3"
+                                id="topnav-hamburger-icon"
+                            >
+                                <span className="hamburger-icon">
+                                    <span />
+                                    <span />
+                                    <span />
+                                </span>
+                            </button>
+                        </div>
+                        <div className="d-flex align-items-center">
+                            <div className="dropdown d-md-none topbar-head-dropdown header-item">
+                                <button
+                                    type="button"
+                                    className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
+                                    id="page-header-search-dropdown"
+                                    data-bs-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                >
+                                    <i className="bx bx-search fs-22" />
+                                </button>
+                                <div className="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" aria-labelledby="page-header-search-dropdown">
+                                    <form className="p-3">
+                                        <div className="form-group m-0">
+                                            <div className="input-group">
+                                                <input
+                                                    type="text"
+                                                    className="form-control"
+                                                    placeholder="Search ..."
+                                                    aria-label="Recipient's username"
+                                                />
+                                                <button className="btn btn-primary" type="submit">
+                                                    <i className="mdi mdi-magnify" />
+                                                </button>
+                                            </div>
                                         </div>
-
-                                        <div className="flex flex-col space-y-4">
-                                            {rightNavItems.map((item) => (
-                                                <a
-                                                    key={item.title}
-                                                    href={item.href}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="flex items-center space-x-2 font-medium"
-                                                >
-                                                    {item.icon && <Icon iconNode={item.icon} className="h-5 w-5" />}
-                                                    <span>{item.title}</span>
-                                                </a>
-                                            ))}
+                                    </form>
+                                </div>
+                            </div>
+                            <div className="header-item d-none d-sm-flex ms-1">
+                                <button type="button" className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle" data-toggle="fullscreen">
+                                    <i className="bx bx-fullscreen fs-22" />
+                                </button>
+                            </div>
+                            <div className="header-item d-none d-sm-flex ms-1">
+                                <button type="button" className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle light-dark-mode">
+                                    <i className="bx bx-moon fs-22" />
+                                </button>
+                            </div>
+                            <div className="dropdown topbar-head-dropdown header-item ms-1" id="notificationDropdown">
+                                <button
+                                    type="button"
+                                    className="btn btn-icon btn-topbar btn-ghost-secondary rounded-circle"
+                                    id="page-header-notifications-dropdown"
+                                    data-bs-toggle="dropdown"
+                                    data-bs-auto-close="outside"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                >
+                                    <i className="bx bx-bell fs-22" />
+                                </button>
+                                <div
+                                    className="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0"
+                                    aria-labelledby="page-header-notifications-dropdown"
+                                >
+                                    <div className="dropdown-head bg-primary bg-pattern rounded-top">
+                                        <div className="p-3">
+                                            <div className="row align-items-center">
+                                                <div className="col">
+                                                    <h6 className="fs-16 fw-semibold m-0 text-white"> Notifications </h6>
+                                                </div>
+                                                <div className="dropdown-tabs col-auto">
+                                                    <span className="badge bg-light-subtle text-body fs-13"> 4 New</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="px-2 pt-2">
+                                            <ul
+                                                className="nav nav-tabs dropdown-tabs nav-tabs-custom"
+                                                data-dropdown-tabs="true"
+                                                id="notificationItemsTab"
+                                                role="tablist"
+                                            >
+                                                <li className="nav-item waves-effect waves-light">
+                                                    <a
+                                                        className="nav-link active"
+                                                        data-bs-toggle="tab"
+                                                        href="#alerts-tab"
+                                                        role="tab"
+                                                        aria-selected="false"
+                                                    >
+                                                        Alerts
+                                                    </a>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
+                                    <div className="tab-content position-relative" id="notificationItemsTabContent">
+                                        <div className="tab-pane fade py-2 ps-2" id="messages-tab" role="tabpanel" aria-labelledby="messages-tab">
+                                            <div data-simplebar className="pe-2">
+                                                <div className="text-reset notification-item d-block dropdown-item">
+                                                    <div className="d-flex">
+                                                        <img
+                                                            src="assets/images/users/avatar-3.jpg"
+                                                            className="rounded-circle avatar-xs me-3"
+                                                            alt="user-pic"
+                                                        />
+                                                        <div className="flex-grow-1">
+                                                            <a href="#!" className="stretched-link">
+                                                                <h6 className="fs-13 fw-semibold mt-0 mb-1">James Lemire</h6>
+                                                            </a>
+                                                            <div className="fs-13 text-muted">
+                                                                <p className="mb-1">We talked about a project on linkedin.</p>
+                                                            </div>
+                                                            <p className="fs-11 fw-medium text-uppercase text-muted mb-0">
+                                                                <span>
+                                                                    <i className="mdi mdi-clock-outline" /> 30 min ago
+                                                                </span>
+                                                            </p>
+                                                        </div>
+                                                        <div className="fs-15 px-2">
+                                                            <div className="form-check notification-check">
+                                                                <input
+                                                                    className="form-check-input"
+                                                                    type="checkbox"
+                                                                    id="messages-notification-check01"
+                                                                />
+                                                                <label className="form-check-label" htmlFor="messages-notification-check01" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="text-reset notification-item d-block dropdown-item">
+                                                    <div className="d-flex">
+                                                        <img
+                                                            src="assets/images/users/avatar-2.jpg"
+                                                            className="rounded-circle avatar-xs me-3"
+                                                            alt="user-pic"
+                                                        />
+                                                        <div className="flex-grow-1">
+                                                            <a href="#!" className="stretched-link">
+                                                                <h6 className="fs-13 fw-semibold mt-0 mb-1">Angela Bernier</h6>
+                                                            </a>
+                                                            <div className="fs-13 text-muted">
+                                                                <p className="mb-1">Answered to your comment on the cash flow forecast's graph 🔔.</p>
+                                                            </div>
+                                                            <p className="fs-11 fw-medium text-uppercase text-muted mb-0">
+                                                                <span>
+                                                                    <i className="mdi mdi-clock-outline" /> 2 hrs ago
+                                                                </span>
+                                                            </p>
+                                                        </div>
+                                                        <div className="fs-15 px-2">
+                                                            <div className="form-check notification-check">
+                                                                <input
+                                                                    className="form-check-input"
+                                                                    type="checkbox"
+                                                                    id="messages-notification-check02"
+                                                                />
+                                                                <label className="form-check-label" htmlFor="messages-notification-check02" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="text-reset notification-item d-block dropdown-item">
+                                                    <div className="d-flex">
+                                                        <img
+                                                            src="assets/images/users/avatar-6.jpg"
+                                                            className="rounded-circle avatar-xs me-3"
+                                                            alt="user-pic"
+                                                        />
+                                                        <div className="flex-grow-1">
+                                                            <a href="#!" className="stretched-link">
+                                                                <h6 className="fs-13 fw-semibold mt-0 mb-1">Kenneth Brown</h6>
+                                                            </a>
+                                                            <div className="fs-13 text-muted">
+                                                                <p className="mb-1">Mentionned you in his comment on 📃 invoice #12501.</p>
+                                                            </div>
+                                                            <p className="fs-11 fw-medium text-uppercase text-muted mb-0">
+                                                                <span>
+                                                                    <i className="mdi mdi-clock-outline" /> 10 hrs ago
+                                                                </span>
+                                                            </p>
+                                                        </div>
+                                                        <div className="fs-15 px-2">
+                                                            <div className="form-check notification-check">
+                                                                <input
+                                                                    className="form-check-input"
+                                                                    type="checkbox"
+                                                                    id="messages-notification-check03"
+                                                                />
+                                                                <label className="form-check-label" htmlFor="messages-notification-check03" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="text-reset notification-item d-block dropdown-item">
+                                                    <div className="d-flex">
+                                                        <img
+                                                            src="assets/images/users/avatar-8.jpg"
+                                                            className="rounded-circle avatar-xs me-3"
+                                                            alt="user-pic"
+                                                        />
+                                                        <div className="flex-grow-1">
+                                                            <a href="#!" className="stretched-link">
+                                                                <h6 className="fs-13 fw-semibold mt-0 mb-1">Maureen Gibson</h6>
+                                                            </a>
+                                                            <div className="fs-13 text-muted">
+                                                                <p className="mb-1">We talked about a project on linkedin.</p>
+                                                            </div>
+                                                            <p className="fs-11 fw-medium text-uppercase text-muted mb-0">
+                                                                <span>
+                                                                    <i className="mdi mdi-clock-outline" /> 3 days ago
+                                                                </span>
+                                                            </p>
+                                                        </div>
+                                                        <div className="fs-15 px-2">
+                                                            <div className="form-check notification-check">
+                                                                <input
+                                                                    className="form-check-input"
+                                                                    type="checkbox"
+                                                                    id="messages-notification-check04"
+                                                                />
+                                                                <label className="form-check-label" htmlFor="messages-notification-check04" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="view-all my-3 text-center">
+                                                    <button type="button" className="btn btn-soft-success waves-effect waves-light">
+                                                        View All Messages <i className="ri-arrow-right-line align-middle" />
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="tab-pane fade show active p-4" id="alerts-tab" role="tabpanel" aria-labelledby="alerts-tab" />
+                                    </div>
                                 </div>
-                            </SheetContent>
-                        </Sheet>
-                    </div>
-
-                    <Link href="/dashboard" prefetch className="flex items-center space-x-2">
-                        <AppLogo />
-                    </Link>
-
-                    {/* Desktop Navigation */}
-                    <div className="ml-6 hidden h-full items-center space-x-6 lg:flex">
-                        <NavigationMenu className="flex h-full items-stretch">
-                            <NavigationMenuList className="flex h-full items-stretch space-x-2">
-                                {mainNavItems.map((item, index) => (
-                                    <NavigationMenuItem key={index} className="relative flex h-full items-center">
-                                        <Link
-                                            href={item.href}
-                                            className={cn(
-                                                navigationMenuTriggerStyle(),
-                                                page.url === item.href && activeItemStyles,
-                                                'h-9 cursor-pointer px-3',
-                                            )}
-                                        >
-                                            {item.icon && <Icon iconNode={item.icon} className="mr-2 h-4 w-4" />}
-                                            {item.title}
-                                        </Link>
-                                        {page.url === item.href && (
-                                            <div className="absolute bottom-0 left-0 h-0.5 w-full translate-y-px bg-black dark:bg-white"></div>
-                                        )}
-                                    </NavigationMenuItem>
-                                ))}
-                            </NavigationMenuList>
-                        </NavigationMenu>
-                    </div>
-
-                    <div className="ml-auto flex items-center space-x-2">
-                        <div className="relative flex items-center space-x-1">
-                            <Button variant="ghost" size="icon" className="group h-9 w-9 cursor-pointer">
-                                <Search className="!size-5 opacity-80 group-hover:opacity-100" />
-                            </Button>
-                            <div className="hidden lg:flex">
-                                {rightNavItems.map((item) => (
-                                    <TooltipProvider key={item.title} delayDuration={0}>
-                                        <Tooltip>
-                                            <TooltipTrigger>
-                                                <a
-                                                    href={item.href}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="group text-accent-foreground ring-offset-background hover:bg-accent hover:text-accent-foreground focus-visible:ring-ring ml-1 inline-flex h-9 w-9 items-center justify-center rounded-md bg-transparent p-0 text-sm font-medium transition-colors focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
-                                                >
-                                                    <span className="sr-only">{item.title}</span>
-                                                    {item.icon && <Icon iconNode={item.icon} className="size-5 opacity-80 group-hover:opacity-100" />}
-                                                </a>
-                                            </TooltipTrigger>
-                                            <TooltipContent>
-                                                <p>{item.title}</p>
-                                            </TooltipContent>
-                                        </Tooltip>
-                                    </TooltipProvider>
-                                ))}
+                            </div>
+                            <div className="dropdown ms-sm-3 header-item topbar-user">
+                                <button
+                                    type="button"
+                                    className="btn"
+                                    id="page-header-user-dropdown"
+                                    data-bs-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                >
+                                    <span className="d-flex align-items-center">
+                                        <img
+                                            className="rounded-circle header-profile-user"
+                                            src="assets/images/users/avatar-3.jpg"
+                                            alt="Header Avatar"
+                                        />
+                                        <span className="ms-xl-2 text-start">
+                                            <span className="d-none d-xl-inline-block fw-medium user-name-text ms-1">Naresh Prajapati</span>
+                                            <span className="d-none d-xl-block fs-12 user-name-sub-text ms-1">naresh.p@dbcorp.in</span>
+                                        </span>
+                                    </span>
+                                </button>
+                                <div className="dropdown-menu dropdown-menu-end">
+                                    {/* item*/}
+                                    <a className="dropdown-item" href="pages-profile.html">
+                                        <i className="mdi mdi-account-circle text-muted fs-16 me-1 align-middle" />{' '}
+                                        <span className="align-middle">Profile</span>
+                                    </a>
+                                    <a className="dropdown-item" href="https://s.bhaskarmail.com/" target="_blank">
+                                        <i className="mdi mdi-lock text-muted fs-16 me-1 align-middle" />{' '}
+                                        <span className="align-middle">Change Password</span>
+                                    </a>
+                                    <a
+                                        className="dropdown-item"
+                                        href="https://sites.google.com/dbcorp.in/mytravel/welcome?authuser=0"
+                                        target="_blank"
+                                    >
+                                        <i className="bx bx-book-open text-muted fs-16 me-1 align-middle" />{' '}
+                                        <span className="align-middle">User Manual</span>
+                                    </a>
+                                    <a className="dropdown-item" href="login.html">
+                                        <i className="mdi mdi-logout text-muted fs-16 me-1 align-middle" />{' '}
+                                        <span className="align-middle" data-key="t-logout">
+                                            Logout
+                                        </span>
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                        <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <Button variant="ghost" className="size-10 rounded-full p-1">
-                                    <Avatar className="size-8 overflow-hidden rounded-full">
-                                        <AvatarImage src={auth.user.avatar} alt={auth.user.name} />
-                                        <AvatarFallback className="rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
-                                            {getInitials(auth.user.name)}
-                                        </AvatarFallback>
-                                    </Avatar>
-                                </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className="w-56" align="end">
-                                <UserMenuContent user={auth.user} />
-                            </DropdownMenuContent>
-                        </DropdownMenu>
                     </div>
                 </div>
+            </header>
+            {/* removeNotificationModal */}
+            <div id="removeNotificationModal" className="modal fade zoomIn" tabIndex={-1} aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" id="NotificationModalbtn-close" />
+                        </div>
+                        <div className="modal-body">
+                            <div className="mt-2 text-center">
+                                <div className="fs-15 mx-sm-5 mx-4 mt-4 pt-2">
+                                    <h4>Are you sure ?</h4>
+                                    <p className="text-muted mx-4 mb-0">Are you sure you want to remove this Notification ?</p>
+                                </div>
+                            </div>
+                            <div className="d-flex justify-content-center mt-4 mb-2 gap-2">
+                                <button type="button" className="btn btn-light w-sm" data-bs-dismiss="modal">
+                                    Close
+                                </button>
+                                <button type="button" className="btn btn-danger w-sm" id="delete-notification">
+                                    Yes, Delete It!
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {/* /.modal-content */}
+                </div>
+                {/* /.modal-dialog */}
             </div>
-            {breadcrumbs.length > 1 && (
-                <div className="border-sidebar-border/70 flex w-full border-b">
-                    <div className="mx-auto flex h-12 w-full items-center justify-start px-4 text-neutral-500 md:max-w-7xl">
-                        <Breadcrumbs breadcrumbs={breadcrumbs} />
-                    </div>
-                </div>
-            )}
         </>
     );
 }

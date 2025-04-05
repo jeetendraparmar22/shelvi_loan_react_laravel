@@ -15,7 +15,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 // Test route
-Route::get('loan', [LoanController::class, 'index'])->name('loan');
+Route::get('loans/approved', [LoanController::class, 'index'])->name('loan.approved');
 
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';
