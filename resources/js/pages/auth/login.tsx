@@ -36,7 +36,7 @@ export default function Login() {
             <form onSubmit={submit} className="needs-validation" noValidate>
                 <div className="mb-4">
                     <label htmlFor="email" className="form-label">
-                        Mobile No
+                        Email
                     </label>
                     <div className="flex_wrap">
                         <input

@@ -1,3 +1,5 @@
+import { Link } from '@inertiajs/react';
+
 const AppHeaderLayout = () => {
     return (
         <>
@@ -293,12 +295,12 @@ const AppHeaderLayout = () => {
                                         <i className="bx bx-book-open text-muted fs-16 me-1 align-middle" />{' '}
                                         <span className="align-middle">User Manual</span>
                                     </a>
-                                    <a className="dropdown-item" href="login.html">
+                                    <Link className="dropdown-item" href={route('logout')} method="post" as="button">
                                         <i className="mdi mdi-logout text-muted fs-16 me-1 align-middle" />
                                         <span className="align-middle" data-key="t-logout">
                                             Logout
                                         </span>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

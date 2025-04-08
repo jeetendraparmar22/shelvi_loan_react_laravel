@@ -14,8 +14,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 });
 
-// Test route
+// Loan routes
 Route::get('loans/approved', [LoanController::class, 'index'])->name('loan.approved');
+Route::get('loan/process/{id}', [LoanController::class, 'show'])->name('loan.process');
+Route::post('emi-schedule/generate', [LoanController::class, 'generateEmiSchedule'])->name('emi-schedule.generate');
+
 
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';
