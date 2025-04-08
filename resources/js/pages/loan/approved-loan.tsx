@@ -1,6 +1,6 @@
 import AppInnerPage from '@/components/app-inner-page';
 import AppLayout from '@/layouts/app-layout';
-import { Head, usePage } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import { useEffect } from 'react';
 
 const ApprovedLoan = () => {
@@ -48,6 +48,7 @@ const ApprovedLoan = () => {
                                                     <th data-ordering="false">Name</th>
                                                     <th data-ordering="false">Approved Date</th>
                                                     <th data-ordering="false">Status</th>
+                                                    <th>Action</th>
                                                     {/* <th>From - To</th>
                                                     <th>Approved By</th>
                                                     <th>Status</th> */}
@@ -70,28 +71,20 @@ const ApprovedLoan = () => {
 
                                                         <td>{loan.approved_date}</td>
                                                         <td>{loan.loan_status}</td>
-                                                        {/* <td>Bhopal Combined-Mumbai</td>
-                                                        <td>Abhay Singh</td>
                                                         <td>
-                                                            <div className="requ_box">
-                                                                <a
-                                                                    href="#"
-                                                                    className="badge bg-info"
-                                                                    data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top"
-                                                                >
-                                                                    B
-                                                                </a>
-                                                                <a
-                                                                    href="#"
-                                                                    className="badge bg-danger"
-                                                                    data-bs-toggle="tooltip"
-                                                                    data-bs-placement="top"
-                                                                >
-                                                                    S
-                                                                </a>
-                                                            </div>
-                                                        </td> */}
+                                                            <Link
+                                                                href={route('loan.process', loan.id)}
+                                                                className="btn btn-sm btn-primary waves-effect waves-light mr-1"
+                                                            >
+                                                                <i className="ri-calendar-line"></i> Process for Loan
+                                                            </Link>
+                                                            {/* <a
+                                                                href="javascript:void(0)"
+                                                                className="btn btn-sm btn-info waves-effect waves-light mr-1"
+                                                            >
+                                                                <i className="ri-pencil-line"></i> Update
+                                                            </a> */}
+                                                        </td>
                                                     </tr>
                                                 ))}
                                             </tbody>

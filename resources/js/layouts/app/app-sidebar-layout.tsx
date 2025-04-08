@@ -134,7 +134,7 @@ const AppSidebarLayout = () => {
                                     </ul>
                                 </div>
                             </li>
-                            <li className="nav-item">
+                            {/* <li className="nav-item">
                                 <a
                                     className="nav-link menu-link"
                                     href="#Master"
@@ -496,7 +496,7 @@ const AppSidebarLayout = () => {
                                 <Link className="nav-link menu-link" method="post" as="button" href={route('logout')}>
                                     <i className="ri-logout-circle-r-line" /> <span>Logout</span>
                                 </Link>
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                     {/* Sidebar */}

@@ -95,6 +95,9 @@
 
     <!-- App js -->
     <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="{{ asset('assets/libs/flatpickr/flatpickr.min.js') }}"></script>
+
+
 
     <script>
         document.getElementById("sa-success") &&

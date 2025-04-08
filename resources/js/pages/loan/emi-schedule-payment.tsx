@@ -1,0 +1,440 @@
+import AppInnerPage from '@/components/app-inner-page';
+import AppLayout from '@/layouts/app-layout';
+import { Head, useForm, usePage } from '@inertiajs/react';
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.css';
+import { FormEventHandler, useEffect, useRef } from 'react';
+import EmiSchedule from './emi-schedule';
+
+export default function EmiSchedulePayment() {
+    const { loanApplication, emiSchedules } = usePage().props;
+
+    const emiDateInputRef = useRef(null);
+
+    useEffect(() => {
+        // Initialize Flatpickr on the input element
+        flatpickr(emiDateInputRef.current, {
+            dateFormat: 'd-m-Y',
+            defaultDate: new Date(),
+            onChange: (selectedDates, dateStr) => {
+                console.log('Selected date:', dateStr);
+            },
+        });
+    }, []);
+
+    // generate EMI schedule
+    const { data, setData, post } = useForm({
+        loan_id: loanApplication.id,
+        start_date: '08-04-2025',
+    });
+
+    const submit: FormEventHandler = (e) => {
+        e.preventDefault();
+
+        post(route('emi-schedule.generate'), {
+            onSuccess: (response: any) => {
+                console.log('EMI schedule generated successfully:', response);
+            },
+            onError: (errors: any) => {
+                console.error('Error generating EMI schedule:', errors);
+            },
+        });
+    };
+    return (
+        <>
+            <AppLayout>
+                <Head title="Loan Process" />
+                <div className="page-content expense_pending_page">
+                    <div className="container-fluid">
+                        {/* start page title */}
+                        <AppInnerPage pageTitle="Loan Process"></AppInnerPage>
+                        <div className="view_page_wrapper">
+                            {/* <div className="right_corners mb-3">
+                                <button className="btn btn-secondary btn-border waves-effect waves-light mt-0 mr-2" type="button">
+                                    Print
+                                </button>
+                                <button className="btn btn-success btn-border waves-effect waves-light mt-0" type="button">
+                                    Clarification Conversation
+                                </button>
+                            </div> */}
+                            <div className="detail_main_wrap">
+                                <div className="detail_header">
+                                    <h4>Application details ({loanApplication.vehicle_registration_no})</h4>
+                                </div>
+                                <div className="detail_card">
+                                    <div className="row">
+                                        <div className="col-lg-4 pr-0 pl-0">
+                                            <div className="table-responsive">
+                                                <table className="table-borderless detail_tbl_claim mb-0 table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th className="ps-0" scope="row">
+                                                                <strong>Name :</strong>
+                                                            </th>
+                                                            <td className="text-muted">
+                                                                {loanApplication.first_name}
+                                                                &nbsp;
+                                                                {loanApplication.surname}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th className="ps-0" scope="row">
+                                                                <strong>Mobile No :</strong>
+                                                            </th>
+                                                            <td className="text-muted">{loanApplication.mobile_no}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th className="ps-0" scope="row">
+                                                                <strong>Finance Name :</strong>
+                                                            </th>
+                                                            <td className="text-muted">{loanApplication.finance_name}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th className="ps-0" scope="row">
+                                                                <strong>Excecutive Name :</strong>
+                                                            </th>
+                                                            <td className="text-muted">{loanApplication.excecutive_name}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th className="ps-0" scope="row">
+                                                                <strong>Dealer Name :</strong>
+                                                            </th>
+                                                            <td className="text-muted">{loanApplication.Dealer_name}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th className="ps-0" scope="row">
+                                                                <strong>Vehicle Type :</strong>
+                                                            </th>
+                                                            <td className="text-muted">{loanApplication.vehicle_type}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-4 pr-0 pl-0">
+                                            <div className="table-responsive">
+                                                <table className="table-borderless detail_tbl_claim mb-0 table">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th className="ps-0" scope="row">
+                                                                <strong>Vehicle Registration Year :</strong>
+                                                            </th>
+                                                            <td className="text-muted">{loanApplication.vehicle_registration_year}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th className="ps-0" scope="row">
+                                                                <strong>File Login Date :</strong>
+                                                            </th>
+                                                            <td className="text-muted">
+                                                                {new Date(loanApplication.file_log_in_date).toLocaleDateString('en-GB')}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th className="ps-0" scope="row">
+                                                                <strong>Address:</strong>
+                                                            </th>
+                                                            <td className="text-muted">{loanApplication.address}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th className="ps-0" scope="row">
+                                                                <strong>Loan Amount :</strong>
+                                                            </th>
+                                                            <td className="text-muted">{loanApplication.loan_amount} - INR</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th className="ps-0" scope="row">
+                                                                <strong>Rate of Interest :</strong>
+                                                            </th>
+                                                            <td className="text-muted">{loanApplication.interest_rate} %</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th className="ps-0" scope="row">
+                                                                <strong>Total EMI :</strong>
+                                                            </th>
+                                                            <td className="text-muted">{loanApplication.loan_term} Months</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div className="col-lg-4 pr-0 pl-0">
+                                            <div className="attached_btns mt-4">
+                                                <button
+                                                    className="btn btn-info btn-border mr-2"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#emi_scheduler"
+                                                    type="button"
+                                                >
+                                                    Generate EMI Schedule
+                                                </button>
+                                                {/* <button className="btn btn-info btn-border" type="button">
+                                                    View RC
+                                                </button> */}
+                                            </div>
+                                            {/* <div class="attached_btns mt-2">
+                                                <button class="btn btn-primary  mt-2 btn-border mr-3" type="button">Special Approval For TR/752269</button>
+                                                <button class="btn btn-primary mt-2 btn-border" type="button">Special Approval For TR/752269/MC2</button>
+                                            </div> */}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* DA Particulars */}
+                            <div className="section_acc da_particulars_section">
+                                <div className="bg_sec_header">
+                                    <div className="d-flex align-items-center">
+                                        <h5>Loan Details</h5>
+                                    </div>
+                                </div>
+                                <div className="sub_card">
+                                    <div className="table-responsive">
+                                        <table className="table-nowrap tbl_da_particulars mb-0 table">
+                                            <thead className="table-light-red">
+                                                <tr>
+                                                    <th scope="col">Login Date</th>
+                                                    <th scope="col">Approve Date</th>
+                                                    <th scope="col">Loan Amount</th>
+                                                    <th scope="col">ROI</th>
+                                                    <th scope="col">Tenure</th>
+                                                    <th scope="col">EMI</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>24-11-2023</td>
+                                                    <td>24-11-2023</td>
+                                                    <td>Bhopal</td>
+                                                    <td>700</td>
+                                                    <td>24 Hrs</td>
+                                                    <td>Full DA</td>
+
+                                                    <td>
+                                                        <div className="d-flex">
+                                                            <p className="mr-2 mb-0"></p>
+                                                            <a
+                                                                href="#"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#edit_value"
+                                                                className="btn btn_edit ml-2"
+                                                            >
+                                                                <i className="ri-pencil-line" />
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div className="total_tbl_wrap">
+                                            <h5>Grand Total</h5>
+                                            <h5>:</h5>
+                                            <h6>2100</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* DA Particulars */}
+
+                            <EmiSchedule emiSchedules={emiSchedules}></EmiSchedule>
+
+                            {/* Travel Expense Summary */}
+                            <div className="flex_sections_bottom">
+                                <div className="section_acc travel_summary_wrapper">
+                                    <div className="bg_sec_header">
+                                        <div className="d-flex align-items-center">
+                                            <h5>Summary</h5>
+                                        </div>
+                                    </div>
+                                    <div className="sub_card">
+                                        <div className="table-responsive">
+                                            <table className="table-borderless tbl_summary mb-0 table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th className="ps-0" scope="row">
+                                                            Travel Cost Total
+                                                        </th>
+                                                        <th>:</th>
+                                                        <td>1400</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th className="ps-0" scope="row">
+                                                            Paid By Company
+                                                        </th>
+                                                        <th>:</th>
+                                                        <td>00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th className="ps-0" scope="row">
+                                                            Paid By Self
+                                                        </th>
+                                                        <th>:</th>
+                                                        <td>00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th className="ps-0" scope="row">
+                                                            DA
+                                                        </th>
+                                                        <th>:</th>
+                                                        <td>00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th className="ps-0" scope="row">
+                                                            Travel Advance
+                                                        </th>
+                                                        <th>:</th>
+                                                        <td>
+                                                            <div className="d-flex">
+                                                                <p className="mr-2 mb-0">10</p>
+                                                                <a
+                                                                    href="#"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#edit_value"
+                                                                    className="btn btn_edit ml-2"
+                                                                >
+                                                                    <i className="ri-pencil-line" />
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th className="ps-0" scope="row">
+                                                            Pay to Employee
+                                                        </th>
+                                                        <th>:</th>
+                                                        <td>
+                                                            <strong>00</strong>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="btn_invoices_flex">
+                                    <button className="btn btn-info">Invoice Attachment</button>
+                                    <button className="btn btn-green btn-border" data-bs-toggle="modal" data-bs-target="#approve_task_modal">
+                                        Approve
+                                    </button>
+                                    <button className="btn btn-danger btn-border" data-bs-toggle="modal" data-bs-target="#Clarify_modal">
+                                        Clarify Checker
+                                    </button>
+                                </div>
+                                <div className="section_acc travel_summary_wrapper approved_by_wrapper">
+                                    <div className="bg_sec_header">
+                                        <div className="d-flex align-items-center">
+                                            <h5>Approved By</h5>
+                                        </div>
+                                    </div>
+                                    <div className="sub_card">
+                                        <div className="table-responsive">
+                                            <table className="table-borderless tbl_summary mb-0 table">
+                                                <tbody>
+                                                    <tr>
+                                                        <th className="ps-0" scope="row">
+                                                            Manager
+                                                        </th>
+                                                        <th>:</th>
+                                                        <td>RP Manager at 06-10-2023 19:00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th className="ps-0" scope="row">
+                                                            SAP Voucher
+                                                        </th>
+                                                        <th>:</th>
+                                                        <td>Not Attached</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th className="ps-0" scope="row">
+                                                            SAP Document
+                                                        </th>
+                                                        <th>:</th>
+                                                        <td>1900117489 at 13-10-2023 13:00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th className="ps-0" scope="row">
+                                                            Checker Maker
+                                                        </th>
+                                                        <th>:</th>
+                                                        <td>-----------------------</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th className="ps-0" scope="row">
+                                                            Finance Head
+                                                        </th>
+                                                        <th>:</th>
+                                                        <td>-----------------------</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th className="ps-0" scope="row">
+                                                            Auditor
+                                                        </th>
+                                                        <th>:</th>
+                                                        <td>-----------------------</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/* end page title */}
+                    </div>
+                    {/* container-fluid */}
+                </div>
+
+                {/* Modals */}
+                <div
+                    id="emi_scheduler"
+                    className="modal fade"
+                    tabIndex={-1}
+                    aria-labelledby="myModalLabel"
+                    aria-hidden="true"
+                    style={{ display: 'none' }}
+                >
+                    <div className="modal-dialog modal-dialog-centered">
+                        <form onSubmit={submit}>
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title" id="myModalLabel">
+                                        EMI Start Date
+                                    </h5>
+                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
+                                </div>
+                                <div className="modal-body p-1">
+                                    <div className="confirm_details_tbl">
+                                        <div className="other_details">
+                                            <div className="row">
+                                                <div className="col-lg-12 mb-3">
+                                                    <div className="datepicker_cus">
+                                                        <input
+                                                            type="text"
+                                                            placeholder="Enter DateTime"
+                                                            className="form-control"
+                                                            ref={emiDateInputRef}
+                                                        />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="modal-footer">
+                                    <button type="button" className="btn btn-danger" data-bs-dismiss="modal">
+                                        Close
+                                    </button>
+                                    <button type="submit" className="btn btn-primary" data-bs-dismiss="modal">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        {/* /.modal-content */}
+                    </div>
+                    {/* /.modal-dialog */}
+                </div>
+            </AppLayout>
+        </>
+    );
+}
