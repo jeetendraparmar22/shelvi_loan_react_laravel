@@ -16,9 +16,7 @@ export default function EmiSchedulePayment() {
         flatpickr(emiDateInputRef.current, {
             dateFormat: 'd-m-Y',
             defaultDate: new Date(),
-            onChange: (selectedDates, dateStr) => {
-                console.log('Selected date:', dateStr);
-            },
+            onChange: (selectedDates, dateStr) => {},
         });
     }, []);
 
@@ -32,7 +30,7 @@ export default function EmiSchedulePayment() {
         e.preventDefault();
 
         post(route('emi-schedule.generate'), {
-            onSuccess: (response: any) => {
+            onSuccess: (response) => {
                 console.log('EMI schedule generated successfully:', response);
             },
             onError: (errors: any) => {
@@ -179,62 +177,6 @@ export default function EmiSchedulePayment() {
                                     </div>
                                 </div>
                             </div>
-
-                            {/* DA Particulars */}
-                            <div className="section_acc da_particulars_section">
-                                <div className="bg_sec_header">
-                                    <div className="d-flex align-items-center">
-                                        <h5>Loan Details</h5>
-                                    </div>
-                                </div>
-                                <div className="sub_card">
-                                    <div className="table-responsive">
-                                        <table className="table-nowrap tbl_da_particulars mb-0 table">
-                                            <thead className="table-light-red">
-                                                <tr>
-                                                    <th scope="col">Login Date</th>
-                                                    <th scope="col">Approve Date</th>
-                                                    <th scope="col">Loan Amount</th>
-                                                    <th scope="col">ROI</th>
-                                                    <th scope="col">Tenure</th>
-                                                    <th scope="col">EMI</th>
-                                                    <th scope="col">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>24-11-2023</td>
-                                                    <td>24-11-2023</td>
-                                                    <td>Bhopal</td>
-                                                    <td>700</td>
-                                                    <td>24 Hrs</td>
-                                                    <td>Full DA</td>
-
-                                                    <td>
-                                                        <div className="d-flex">
-                                                            <p className="mr-2 mb-0"></p>
-                                                            <a
-                                                                href="#"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#edit_value"
-                                                                className="btn btn_edit ml-2"
-                                                            >
-                                                                <i className="ri-pencil-line" />
-                                                            </a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <div className="total_tbl_wrap">
-                                            <h5>Grand Total</h5>
-                                            <h5>:</h5>
-                                            <h6>2100</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {/* DA Particulars */}
 
                             <EmiSchedule emiSchedules={emiSchedules}></EmiSchedule>
 
@@ -434,6 +376,8 @@ export default function EmiSchedulePayment() {
                     </div>
                     {/* /.modal-dialog */}
                 </div>
+
+                {/* End EMI Scheduler Modal */}
             </AppLayout>
         </>
     );
