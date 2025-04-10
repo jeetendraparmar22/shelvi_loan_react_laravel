@@ -14,6 +14,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 });
 
+// Loan application routes
+Route::resource('loan-applications', App\Http\Controllers\LoanApplication\LoanApplicationController::class);
+
 // Loan routes
 Route::get('loans/approved', [LoanController::class, 'index'])->name('loan.approved');
 Route::get('loan/process/{id}', [LoanController::class, 'show'])->name('loan.process');
