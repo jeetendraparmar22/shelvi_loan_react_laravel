@@ -45,15 +45,21 @@ const AppSidebarLayout = () => {
                                 <div className="menu-dropdown collapse" id="Travel_Desk">
                                     <ul className="nav nav-sm flex-column">
                                         <li className="nav-item">
+                                            <Link href={route('loan-applications.create')} className="nav-link">
+                                                <span>Crate New Loan Application</span>
+                                            </Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link href={route('loan-applications.index')} className="nav-link">
+                                                <span>Loan Application List</span>
+                                            </Link>
+                                        </li>
+                                        <li className="nav-item">
                                             <Link href={route('loan.approved')} className="nav-link">
                                                 <span>Approved Loan</span>
                                             </Link>
                                         </li>
-                                        <li className="nav-item">
-                                            <a href="travel_desk_inbox.html" className="nav-link">
-                                                <span>Inbox</span>
-                                            </a>
-                                        </li>
+
                                         <li className="nav-item">
                                             <a href="travel_desk_booked_history.html" className="nav-link">
                                                 <span>Booked History</span>

@@ -14,10 +14,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 });
 
+// Loan application routes
+Route::resource('loan-applications', App\Http\Controllers\LoanApplication\LoanApplicationController::class);
+
 // Loan routes
 Route::get('loans/approved', [LoanController::class, 'index'])->name('loan.approved');
 Route::get('loan/process/{id}', [LoanController::class, 'show'])->name('loan.process');
 Route::post('emi-schedule/generate', [LoanController::class, 'generateEmiSchedule'])->name('emi-schedule.generate');
+Route::post('payment-status/update/{id}', [LoanController::class, 'updatePaymentStatus'])->name('payment-status.update');
+
 
 
 require __DIR__ . '/settings.php';

@@ -29,7 +29,7 @@ export default function Dashboard() {
                                 <div className="row">
                                     <div className="col-xl-6 col-md-12">
                                         <div className="card">
-                                            <h5 className="card-title mt-3 mr-2 mb-0 ml-3">Your Travel Request</h5>
+                                            <h5 className="card-title mt-3 mr-2 mb-0 ml-3">Your Loan Request</h5>
                                             <div className="card-body">
                                                 <div className="row">
                                                     <div className="col-lg-4 col-md-4">
@@ -113,7 +113,7 @@ export default function Dashboard() {
                                     </div>
                                     <div className="col-xl-6 col-md-12">
                                         <div className="card">
-                                            <h5 className="card-title mt-3 mr-2 mb-0 ml-3">Your Travel Expenses Avg/Trip: 7605</h5>
+                                            <h5 className="card-title mt-3 mr-2 mb-0 ml-3">Your Loan Expenses Avg/Trip: 7605</h5>
                                             <div className="card-body">
                                                 <div className="row">
                                                     <div className="col-lg-4 col-md-4">
@@ -197,7 +197,7 @@ export default function Dashboard() {
                                     </div>
                                     <div className="col-xl-6 col-md-12">
                                         <div className="card">
-                                            <h5 className="card-title mt-3 mr-2 mb-0 ml-3">Team Mate's Travel</h5>
+                                            <h5 className="card-title mt-3 mr-2 mb-0 ml-3">Team Mate's Loan</h5>
                                             <div className="card-body">
                                                 <div className="row">
                                                     <div className="col-lg-4 col-md-4">
