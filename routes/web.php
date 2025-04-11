@@ -14,6 +14,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 });
 
+
+require __DIR__ . '/funds.php';
+
 // Loan application routes
 Route::resource('loan-applications', App\Http\Controllers\LoanApplication\LoanApplicationController::class);
 

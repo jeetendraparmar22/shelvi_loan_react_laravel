@@ -46,12 +46,12 @@ const AppSidebarLayout = () => {
                                     <ul className="nav nav-sm flex-column">
                                         <li className="nav-item">
                                             <Link href={route('loan-applications.create')} className="nav-link">
-                                                <span>Crate New Loan Application</span>
+                                                <span>Crate New Loan </span>
                                             </Link>
                                         </li>
                                         <li className="nav-item">
                                             <Link href={route('loan-applications.index')} className="nav-link">
-                                                <span>Loan Application List</span>
+                                                <span>Application List</span>
                                             </Link>
                                         </li>
                                         <li className="nav-item">
@@ -59,88 +59,10 @@ const AppSidebarLayout = () => {
                                                 <span>Approved Loan</span>
                                             </Link>
                                         </li>
-
-                                        <li className="nav-item">
-                                            <a href="travel_desk_booked_history.html" className="nav-link">
-                                                <span>Booked History</span>
-                                            </a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a
-                                                className="nav-link menu-link"
-                                                href="#uploadInvoices"
-                                                data-bs-toggle="collapse"
-                                                role="button"
-                                                aria-expanded="false"
-                                                aria-controls="Report"
-                                            >
-                                                <span>Upload Invoices</span>
-                                            </a>
-                                            <div className="menu-dropdown collapse" id="uploadInvoices">
-                                                <ul className="nav nav-sm flex-column">
-                                                    <li className="nav-item">
-                                                        <a href="upload_vendor_invoice.html" className="nav-link">
-                                                            <span>Upload Vendor Invoices</span>
-                                                        </a>
-                                                    </li>
-                                                    <li className="nav-item">
-                                                        <a href="vendor_payment_process.html" className="nav-link">
-                                                            <span>Vendor Payment Process</span>
-                                                        </a>
-                                                    </li>
-                                                    <li className="nav-item">
-                                                        <a href="track_invoice_status.html" className="nav-link">
-                                                            <span>Track Invoice Status </span>
-                                                        </a>
-                                                    </li>
-                                                    <li className="nav-item">
-                                                        <a href="invoice_bill_no.html" className="nav-link">
-                                                            <span>Invoice Process by Bill No. </span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a href="daily_expenses.html" className="nav-link">
-                                                <span>Daily Expenses</span>
-                                            </a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a href="travel_desk_cancellation.html" className="nav-link">
-                                                <span>Cancellation</span>
-                                            </a>
-                                        </li>
-                                        <li className="nav-item">
-                                            <a
-                                                className="nav-link menu-link"
-                                                href="#Policy"
-                                                data-bs-toggle="collapse"
-                                                role="button"
-                                                aria-expanded="false"
-                                                aria-controls="Report"
-                                            >
-                                                <span>Policy / Classification</span>
-                                            </a>
-                                            <div className="menu-dropdown collapse" id="Policy">
-                                                <ul className="nav nav-sm flex-column">
-                                                    <li className="nav-item">
-                                                        <a href="travel_policy.html" className="nav-link">
-                                                            <span>Travel Policy</span>
-                                                        </a>
-                                                    </li>
-                                                    <li className="nav-item">
-                                                        <a href="city_classification.html" className="nav-link">
-                                                            <span>City Classification </span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </li>
                                     </ul>
                                 </div>
                             </li>
-                            {/* <li className="nav-item">
+                            <li className="nav-item">
                                 <a
                                     className="nav-link menu-link"
                                     href="#Master"
@@ -149,16 +71,16 @@ const AppSidebarLayout = () => {
                                     aria-expanded="false"
                                     aria-controls="Report"
                                 >
-                                    <i className="ri-database-2-fill" /> <span> Master Data</span>
+                                    <i className="ri-database-2-fill" /> <span> Expences</span>
                                 </a>
                                 <div className="menu-dropdown collapse" id="Master">
                                     <ul className="nav nav-sm flex-column">
                                         <li className="nav-item">
-                                            <a href="manage_employees.html" className="nav-link">
-                                                <span>Manage Employees</span>
-                                            </a>
+                                            <Link href={route('funds.index')} className="nav-link">
+                                                <span>Credit/Debit Report </span>
+                                            </Link>
                                         </li>
-                                        <li className="nav-item">
+                                        {/* <li className="nav-item">
                                             <a href="manage_categories.html" className="nav-link">
                                                 <span>Categories </span>
                                             </a>
@@ -265,11 +187,11 @@ const AppSidebarLayout = () => {
                                             <a href="travel_policy.html" className="nav-link">
                                                 <span>Policy / Classification </span>
                                             </a>
-                                        </li>
+                                        </li> */}
                                     </ul>
                                 </div>
                             </li>
-                            <li className="nav-item">
+                            {/*<li className="nav-item">
                                 <a
                                     className="nav-link menu-link"
                                     href="#Expense_Checker"

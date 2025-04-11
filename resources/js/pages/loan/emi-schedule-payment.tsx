@@ -57,7 +57,7 @@ export default function EmiSchedulePayment() {
                             </div> */}
                             <div className="detail_main_wrap">
                                 <div className="detail_header">
-                                    <h4>Application details ({loanApplication.vehicle_registration_no})</h4>
+                                    <h4>Application details ({loanApplication.vehicle.vehicle_registration_no})</h4>
                                 </div>
                                 <div className="detail_card">
                                     <div className="row">
@@ -85,25 +85,25 @@ export default function EmiSchedulePayment() {
                                                             <th className="ps-0" scope="row">
                                                                 <strong>Finance Name :</strong>
                                                             </th>
-                                                            <td className="text-muted">{loanApplication.finance_name}</td>
+                                                            <td className="text-muted">{loanApplication.loan.finance_name}</td>
                                                         </tr>
                                                         <tr>
                                                             <th className="ps-0" scope="row">
                                                                 <strong>Excecutive Name :</strong>
                                                             </th>
-                                                            <td className="text-muted">{loanApplication.excecutive_name}</td>
+                                                            <td className="text-muted">{loanApplication.loan.excecutive_name}</td>
                                                         </tr>
                                                         <tr>
                                                             <th className="ps-0" scope="row">
                                                                 <strong>Dealer Name :</strong>
                                                             </th>
-                                                            <td className="text-muted">{loanApplication.Dealer_name}</td>
+                                                            <td className="text-muted">{loanApplication.vehicle.dealer_name}</td>
                                                         </tr>
                                                         <tr>
                                                             <th className="ps-0" scope="row">
                                                                 <strong>Vehicle Type :</strong>
                                                             </th>
-                                                            <td className="text-muted">{loanApplication.vehicle_type}</td>
+                                                            <td className="text-muted">{loanApplication.vehicle.vehicle_type}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -117,39 +117,39 @@ export default function EmiSchedulePayment() {
                                                             <th className="ps-0" scope="row">
                                                                 <strong>Vehicle Registration Year :</strong>
                                                             </th>
-                                                            <td className="text-muted">{loanApplication.vehicle_registration_year}</td>
+                                                            <td className="text-muted">{loanApplication.vehicle.vehicle_registration_year}</td>
                                                         </tr>
                                                         <tr>
                                                             <th className="ps-0" scope="row">
                                                                 <strong>File Login Date :</strong>
                                                             </th>
                                                             <td className="text-muted">
-                                                                {new Date(loanApplication.file_log_in_date).toLocaleDateString('en-GB')}
+                                                                {new Date(loanApplication.loan.file_log_in_date).toLocaleDateString('en-GB')}
                                                             </td>
                                                         </tr>
                                                         <tr>
                                                             <th className="ps-0" scope="row">
                                                                 <strong>Address:</strong>
                                                             </th>
-                                                            <td className="text-muted">{loanApplication.address}</td>
+                                                            <td className="text-muted">{loanApplication.address.address}</td>
                                                         </tr>
                                                         <tr>
                                                             <th className="ps-0" scope="row">
                                                                 <strong>Loan Amount :</strong>
                                                             </th>
-                                                            <td className="text-muted">{loanApplication.loan_amount} - INR</td>
+                                                            <td className="text-muted">{loanApplication.loan.loan_amount} - INR</td>
                                                         </tr>
                                                         <tr>
                                                             <th className="ps-0" scope="row">
                                                                 <strong>Rate of Interest :</strong>
                                                             </th>
-                                                            <td className="text-muted">{loanApplication.interest_rate} %</td>
+                                                            <td className="text-muted">{loanApplication.loan.interest_rate} %</td>
                                                         </tr>
                                                         <tr>
                                                             <th className="ps-0" scope="row">
                                                                 <strong>Total EMI :</strong>
                                                             </th>
-                                                            <td className="text-muted">{loanApplication.loan_term} Months</td>
+                                                            <td className="text-muted">{loanApplication.loan.loan_term} Months</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -163,11 +163,11 @@ export default function EmiSchedulePayment() {
                                                     data-bs-target="#emi_scheduler"
                                                     type="button"
                                                 >
-                                                    Generate EMI Schedule
+                                                    EMI Schedule
                                                 </button>
-                                                {/* <button className="btn btn-info btn-border" type="button">
-                                                    View RC
-                                                </button> */}
+                                                <button className="btn btn-info btn-border" type="button">
+                                                    Loan Agreement
+                                                </button>
                                             </div>
                                             {/* <div class="attached_btns mt-2">
                                                 <button class="btn btn-primary  mt-2 btn-border mr-3" type="button">Special Approval For TR/752269</button>
@@ -185,7 +185,7 @@ export default function EmiSchedulePayment() {
                                 <div className="section_acc travel_summary_wrapper">
                                     <div className="bg_sec_header">
                                         <div className="d-flex align-items-center">
-                                            <h5>Summary</h5>
+                                            <h5>Loan Deails</h5>
                                         </div>
                                     </div>
                                     <div className="sub_card">
@@ -194,14 +194,14 @@ export default function EmiSchedulePayment() {
                                                 <tbody>
                                                     <tr>
                                                         <th className="ps-0" scope="row">
-                                                            Travel Cost Total
+                                                            Total Loan
                                                         </th>
                                                         <th>:</th>
                                                         <td>1400</td>
                                                     </tr>
                                                     <tr>
                                                         <th className="ps-0" scope="row">
-                                                            Paid By Company
+                                                            Total Paid
                                                         </th>
                                                         <th>:</th>
                                                         <td>00</td>
@@ -254,12 +254,12 @@ export default function EmiSchedulePayment() {
                                     </div>
                                 </div>
                                 <div className="btn_invoices_flex">
-                                    <button className="btn btn-info">Invoice Attachment</button>
+                                    <button className="btn btn-info">Force Closer Letter</button>
                                     <button className="btn btn-green btn-border" data-bs-toggle="modal" data-bs-target="#approve_task_modal">
-                                        Approve
+                                        NOC
                                     </button>
                                     <button className="btn btn-danger btn-border" data-bs-toggle="modal" data-bs-target="#Clarify_modal">
-                                        Clarify Checker
+                                        Agreement
                                     </button>
                                 </div>
                                 <div className="section_acc travel_summary_wrapper approved_by_wrapper">

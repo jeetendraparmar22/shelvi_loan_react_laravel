@@ -1,1 +1,0 @@
-import{j as t,L as e}from"./app-BLR83rBi.js";import{A as r}from"./app-layout-BlESaBvg.js";function o(){return t.jsx(t.Fragment,{children:t.jsx(r,{children:t.jsx(e,{title:"Create Loan Application"})})})}export{o as default};

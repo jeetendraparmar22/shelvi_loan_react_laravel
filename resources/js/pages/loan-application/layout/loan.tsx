@@ -1,6 +1,68 @@
 import { Link } from '@inertiajs/react';
+import { useEffect } from 'react';
 
 export default function Loan({ setData, data }) {
+    // Calculate emi
+    const calculateEMI = (loanAmount, loanTerm, interestRate) => {
+        if (!loanAmount || !loanTerm || !interestRate) return 0;
+
+        const monthlyInterestRate = interestRate / (12 * 100);
+
+        // EMI formula: [P * r * (1 + r)^n] / [(1 + r)^n - 1]
+        const emi =
+            (loanAmount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, loanTerm)) / (Math.pow(1 + monthlyInterestRate, loanTerm) - 1);
+
+        return Math.round(emi); // Round off to nearest integer
+    };
+
+    // Update final amount
+    const calculateFinalAmount = (
+        loanAmountPayment,
+        loanSurakhyaVimoPayment,
+        ihoPayment,
+        fileChargePayment,
+        roadSideAssistancePayment,
+        rtoChargePayment,
+        holdPayment,
+    ) => {
+        const finalAmount =
+            parseFloat(loanAmountPayment) -
+            parseFloat(loanSurakhyaVimoPayment) -
+            parseFloat(ihoPayment) -
+            parseFloat(fileChargePayment) -
+            parseFloat(roadSideAssistancePayment) -
+            parseFloat(rtoChargePayment) -
+            parseFloat(holdPayment);
+        return finalAmount;
+    };
+
+    useEffect(() => {
+        const emi = calculateEMI(data.loan_amount, data.loan_term, data.interest_rate);
+        setData('emi', emi); // Update EMI in the state
+
+        const finalAmount = calculateFinalAmount(
+            data.loan_amount,
+            data.loan_surakhya_vimo,
+            data.iho,
+            data.file_charge,
+            data.road_side_assite,
+            data.rto_charge,
+            data.hold_for_insurance,
+        );
+
+        setData('final_total_amount', finalAmount); // Update Final Amount in the state
+    }, [
+        data.loan_amount,
+        data.loan_term,
+        data.interest_rate,
+        data.loan_surakhya_vimo,
+        data.iho,
+        data.file_charge,
+        data.road_side_assite,
+        data.rto_charge,
+        data.hold_for_insurance,
+    ]);
+
     return (
         <>
             <div className="add_mrg_details_wrap">
@@ -34,7 +96,7 @@ export default function Loan({ setData, data }) {
                                             type="text"
                                             id="finance_name"
                                             className="form-control"
-                                            value={data.finance_name}
+                                            value="Shelvi Financial Services"
                                             onChange={(e) => setData('finance_name', e.target.value)}
                                         />
                                     </div>
@@ -48,7 +110,7 @@ export default function Loan({ setData, data }) {
                                             id="finance_address"
                                             className="form-control"
                                             rows="3"
-                                            value={data.finance_address}
+                                            value="Himmatnagar, Gujarat"
                                             onChange={(e) => setData('finance_address', e.target.value)}
                                         ></textarea>
                                     </div>
@@ -86,13 +148,14 @@ export default function Loan({ setData, data }) {
                                 <div className="col-lg-3 col_form mb-3">
                                     <div>
                                         <label htmlFor="emi" className="form-label">
-                                            EMI
+                                            EMI (INR)
                                         </label>
                                         <input
                                             type="number"
                                             id="emi"
                                             placeholder="Enter EMI"
                                             className="form-control"
+                                            readOnly
                                             value={data.emi}
                                             onChange={(e) => setData('emi', e.target.value)}
                                         />
@@ -101,7 +164,7 @@ export default function Loan({ setData, data }) {
                                 <div className="col-lg-3 col_form mb-3">
                                     <div>
                                         <label htmlFor="loan_term" className="form-label">
-                                            Loan Term
+                                            Loan Term (in months)
                                         </label>
                                         <input
                                             type="number"
@@ -116,7 +179,7 @@ export default function Loan({ setData, data }) {
                                 <div className="col-lg-3 col_form mb-3">
                                     <div>
                                         <label htmlFor="interest_rate" className="form-label">
-                                            Interest Rate
+                                            Interest Rate(%)
                                         </label>
                                         <input
                                             type="number"
@@ -243,6 +306,7 @@ export default function Loan({ setData, data }) {
                                             id="final_total_amount"
                                             placeholder="Enter Final Total Amount"
                                             className="form-control"
+                                            readOnly
                                             value={data.final_total_amount}
                                             onChange={(e) => setData('final_total_amount', e.target.value)}
                                         />

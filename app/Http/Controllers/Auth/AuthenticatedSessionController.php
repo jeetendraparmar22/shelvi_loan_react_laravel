@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('loan-applications.create', absolute: false));
+        return redirect()->intended(route('loan-applications.index', absolute: false));
     }
 
     /**
