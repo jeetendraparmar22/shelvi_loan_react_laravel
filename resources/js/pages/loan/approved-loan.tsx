@@ -60,7 +60,7 @@ const ApprovedLoan = () => {
                                                         <td>
                                                             <a href="" data-bs-toggle="modal" data-bs-target="#view_status" className="linking">
                                                                 <strong>
-                                                                    <i className="ri-eye-line" /> VHC/{loan.vehicle_registration_no}
+                                                                    <i className="ri-eye-line" /> VHC/{loan.vehicle.vehicle_registration_no}
                                                                 </strong>
                                                             </a>
                                                         </td>
@@ -69,8 +69,8 @@ const ApprovedLoan = () => {
                                                             {loan.first_name} {loan.last_name} {loan.surname}
                                                         </td>
 
-                                                        <td>{loan.approved_date}</td>
-                                                        <td>{loan.loan_status}</td>
+                                                        <td>{loan.loan.approved_date}</td>
+                                                        <td>{loan.loan.loan_status}</td>
                                                         <td>
                                                             <Link
                                                                 href={route('loan.process', loan.id)}

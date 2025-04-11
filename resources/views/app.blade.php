@@ -29,6 +29,14 @@
         html.dark {
             background-color: oklch(0.145 0 0);
         }
+
+        .transaction-amount-debit {
+            color: red !important
+        }
+
+        .transaction-amount-credit {
+            color: green !important
+        }
     </style>
 
     <title inertia>{{ config('app.name', 'Laravel') }}</title>

@@ -11,6 +11,6 @@ class EmiSchedule extends Model
 
     public function loan()
     {
-        return $this->belongsTo(LoanApplication::class);
+        return $this->belongsTo(Borrower::class, 'loan_id', 'id');
     }
 }

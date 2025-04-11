@@ -8,6 +8,7 @@ use App\Models\BankDetail;
 use App\Models\Borrower;
 use App\Models\Loan;
 use App\Models\Vehicle;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -20,10 +21,11 @@ class LoanApplicationController extends Controller
     public function index()
     {
         //
+
         return Inertia::render(
             'loan-application/index',
             [
-                'loanApplications' => Borrower::with(['address'])->get(),
+                'loanApplications' => Borrower::with(['address', 'vehicle', 'loan'])->get(),
             ]
         );
     }
@@ -142,8 +144,8 @@ class LoanApplicationController extends Controller
                 'engine_no' => $request->engine_no,
                 'fuel_type' => $request->fuel_type,
                 'insurance_company_name' => $request->insurance_company_name,
-                'rc_book' => $request->file('rc_book')->store('rc-book'),
-                'insurance_file' => "4454.jpg",
+                'rc_book' => $request->file('rc_book')->storeAs('rc-book', $request->file('rc_book')->getClientOriginalName()),
+                'insurance_file' => $request->file('insurance_file')->storeAs('insurance-file', $request->file('insurance_file')->getClientOriginalName()),
                 'dealer_name' => $request->dealer_name,
             ]);
 
@@ -199,7 +201,13 @@ class LoanApplicationController extends Controller
      */
     public function show(string $id)
     {
-        //
+        //update loan status
+        $loan = Borrower::find($id)->loan;
+        $loan->update([
+            'loan_status' => 'approved',
+            'approved_date' => Carbon::now(),
+        ]);
+        return to_route('loan-applications.index')->with('success', 'Loan application approved successfully');
     }
 
     /**
@@ -208,6 +216,7 @@ class LoanApplicationController extends Controller
     public function edit(string $id)
     {
         //
+        dd("page edit");
     }
 
     /**
@@ -215,7 +224,7 @@ class LoanApplicationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        dd("update data");
     }
 
     /**

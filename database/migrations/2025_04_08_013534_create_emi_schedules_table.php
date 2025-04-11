@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('paid_date')->nullable();
             $table->timestamps();
 
-            $table->foreign('loan_id')->references('id')->on('customers')->onDelete('cascade');
+            $table->foreign('loan_id')->references('id')->on('borrowers')->onDelete('cascade');
         });
     }
 

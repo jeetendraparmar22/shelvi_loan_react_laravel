@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Borrower;
 use App\Models\EmiSchedule;
 use App\Models\LoanApplication;
 use Illuminate\Http\Request;
@@ -13,9 +14,8 @@ class LoanController extends Controller
     //
     public function index()
     {
-        $approvedLoans = LoanApplication::where('loan_status', 'approved')->whereNotNull('approved_date')
-            ->where('vehicle_registration_no', '!=', '')
-            ->get();
+
+        $approvedLoans = Borrower::with('loan', 'vehicle')->get();
 
         return Inertia::render(
             'loan/approved-loan',
@@ -28,7 +28,8 @@ class LoanController extends Controller
     // Show the details of a specific approved loan
     public function show($id)
     {
-        $loanApplication = LoanApplication::findOrFail($id);
+        $loanApplication = Borrower::with('vehicle', 'loan', 'address')->findOrFail($id);
+
         $emiSchedules = EmiSchedule::where('loan_id', $id)->get();
 
         return Inertia::render(
@@ -48,8 +49,7 @@ class LoanController extends Controller
             'start_date' => 'required|date',
         ]);
 
-        $loanApplication = LoanApplication::select('id', 'final_total_amount', 'loan_term', 'interest_rate', 'emi')->findOrFail($request->loan_id);
-
+        $loanApplication = Borrower::with('loan')->findOrFail($request->loan_id);
         // Check First if EMI schedule already exists then delete it
         $emiSchedule = EmiSchedule::where('loan_id', $request->loan_id)->first();
         if ($emiSchedule) {
@@ -58,12 +58,13 @@ class LoanController extends Controller
 
         // Generate EMI Schedule
         $startDate = Carbon::parse($request->start_date);
-        for ($i = 1; $i <= $loanApplication->loan_term; $i++) {
+        for ($i = 1; $i <= $loanApplication->loan->loan_term; $i++) {
+
             EmiSchedule::create([
                 'loan_id' => $loanApplication->id,
                 'month_number' => $i,
                 'due_date' => $startDate->copy()->addMonthsNoOverflow($i),
-                'emi_amount' => $loanApplication->emi,
+                'emi_amount' => $loanApplication->loan->emi,
                 'status' => 'unpaid',
             ]);
         }
@@ -75,6 +76,8 @@ class LoanController extends Controller
     public function updatePaymentStatus(Request $request, $id)
     {
         $emiSchedule = EmiSchedule::findOrFail($id);
+
+
         $emiSchedule->update([
             'status' => 'paid',
             'paid_date' => Carbon::now(),
