@@ -23,6 +23,7 @@ export default function Borrower({ setData, data }) {
                                             value={data.first_name}
                                             onChange={(e) => setData('first_name', e.target.value)}
                                         />
+                                        {/* {errors.borrower.first_name && <div className="text-danger">{errors.borrower.first_name}</div>} */}
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col_form mb-3">

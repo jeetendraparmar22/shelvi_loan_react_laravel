@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 
 export default function Index() {
     const { loanApplications } = usePage().props;
+
     useEffect(() => {
         const tableId = '#loan_application_list';
 
