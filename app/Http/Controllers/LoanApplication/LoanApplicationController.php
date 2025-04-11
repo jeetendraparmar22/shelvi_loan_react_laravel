@@ -186,11 +186,9 @@ class LoanApplicationController extends Controller
             );
 
             DB::commit();
-
             return to_route('loan-applications.index')->with('success', 'Loan application created successfully');
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['error' => 'Failed to create loan application', 'details' => $e->getMessage()], 500);
         }
     }
 
