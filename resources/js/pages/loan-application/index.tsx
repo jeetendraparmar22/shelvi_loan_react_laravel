@@ -57,12 +57,12 @@ export default function Index() {
                                                 {loanApplications.map((loan) => (
                                                     <tr key={loan.id}>
                                                         <td>
-                                                            <a href="" data-bs-toggle="modal" data-bs-target="#view_status" className="linking">
+                                                            <Link href={route('loan.process', loan.id)} className="linking">
                                                                 <strong>
                                                                     <i className="ri-eye-line" />
                                                                     VH/{loan.vehicle.vehicle_registration_no}
                                                                 </strong>
-                                                            </a>
+                                                            </Link>
                                                         </td>
                                                         <td>{loan.mobile_no}</td>
                                                         <td>
@@ -84,6 +84,7 @@ export default function Index() {
                                                                     <i className="ri-calendar-line"></i> Approve Loan
                                                                 </Link>
                                                             )}
+
                                                             <Link href="" className="btn btn-sm btn-info waves-effect waves-light mr-1">
                                                                 <i className="ri-pencil-line"></i> Edit
                                                             </Link>
