@@ -1,7 +1,7 @@
 import { Link } from '@inertiajs/react';
 import { useEffect } from 'react';
 
-export default function Loan({ setData, data }) {
+export default function Loan({ setData, data, errors }) {
     // Calculate emi
     const calculateEMI = (loanAmount, loanTerm, interestRate) => {
         if (!loanAmount || !loanTerm || !interestRate) return 0;
@@ -85,9 +85,10 @@ export default function Loan({ setData, data }) {
                                             value={data.file_log_in_date}
                                             onChange={(e) => setData('file_log_in_date', e.target.value)}
                                         />
+                                        {errors.file_log_in_date && <span className="text-danger">{errors.file_log_in_date}</span>}
                                     </div>
                                 </div>
-                                <div className="col-lg-3 col_form mb-3">
+                                {/* <div className="col-lg-3 col_form mb-3">
                                     <div>
                                         <label htmlFor="finance_name" className="form-label">
                                             Finance Name
@@ -99,6 +100,7 @@ export default function Loan({ setData, data }) {
                                             value="Shelvi Financial Services"
                                             onChange={(e) => setData('finance_name', e.target.value)}
                                         />
+                                        {errors.finance_name && <span className="text-danger">{errors.finance_name}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col_form mb-3">
@@ -113,8 +115,9 @@ export default function Loan({ setData, data }) {
                                             value="Himmatnagar, Gujarat"
                                             onChange={(e) => setData('finance_address', e.target.value)}
                                         ></textarea>
+                                        {errors.finance_address && <span className="text-danger">{errors.finance_address}</span>}
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="col-lg-3 col_form mb-3">
                                     <div>
                                         <label htmlFor="executive_name" className="form-label">
@@ -128,6 +131,7 @@ export default function Loan({ setData, data }) {
                                             value={data.executive_name}
                                             onChange={(e) => setData('executive_name', e.target.value)}
                                         />
+                                        {errors.executive_name && <span className="text-danger">{errors.executive_name}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col_form mb-3">
@@ -143,6 +147,7 @@ export default function Loan({ setData, data }) {
                                             value={data.loan_amount}
                                             onChange={(e) => setData('loan_amount', e.target.value)}
                                         />
+                                        {errors.loan_amount && <span className="text-danger">{errors.loan_amount}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col_form mb-3">
@@ -159,6 +164,7 @@ export default function Loan({ setData, data }) {
                                             value={data.emi}
                                             onChange={(e) => setData('emi', e.target.value)}
                                         />
+                                        {errors.emi && <span className="text-danger">{errors.emi}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col_form mb-3">
@@ -174,6 +180,7 @@ export default function Loan({ setData, data }) {
                                             value={data.loan_term}
                                             onChange={(e) => setData('loan_term', e.target.value)}
                                         />
+                                        {errors.loan_term && <span className="text-danger">{errors.loan_term}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col_form mb-3">
@@ -189,6 +196,7 @@ export default function Loan({ setData, data }) {
                                             value={data.interest_rate}
                                             onChange={(e) => setData('interest_rate', e.target.value)}
                                         />
+                                        {errors.interest_rate && <span className="text-danger">{errors.interest_rate}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col_form mb-3">
@@ -204,6 +212,7 @@ export default function Loan({ setData, data }) {
                                             value={data.loan_surakhya_vimo}
                                             onChange={(e) => setData('loan_surakhya_vimo', e.target.value)}
                                         />
+                                        {errors.loan_surakhya_vimo && <span className="text-danger">{errors.loan_surakhya_vimo}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col_form mb-3">
@@ -219,6 +228,7 @@ export default function Loan({ setData, data }) {
                                             value={data.iho}
                                             onChange={(e) => setData('iho', e.target.value)}
                                         />
+                                        {errors.iho && <span className="text-danger">{errors.iho}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col_form mb-3">
@@ -234,6 +244,7 @@ export default function Loan({ setData, data }) {
                                             value={data.file_charge}
                                             onChange={(e) => setData('file_charge', e.target.value)}
                                         />
+                                        {errors.file_charge && <span className="text-danger">{errors.file_charge}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col_form mb-3">
@@ -249,6 +260,7 @@ export default function Loan({ setData, data }) {
                                             value={data.road_side_assite}
                                             onChange={(e) => setData('road_side_assite', e.target.value)}
                                         />
+                                        {errors.road_side_assite && <span className="text-danger">{errors.road_side_assite}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col_form mb-3">
@@ -264,6 +276,7 @@ export default function Loan({ setData, data }) {
                                             value={data.rto_charge}
                                             onChange={(e) => setData('rto_charge', e.target.value)}
                                         />
+                                        {errors.rto_charge && <span className="text-danger">{errors.rto_charge}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col_form mb-3">
@@ -279,23 +292,10 @@ export default function Loan({ setData, data }) {
                                             value={data.hold_for_insurance}
                                             onChange={(e) => setData('hold_for_insurance', e.target.value)}
                                         />
+                                        {errors.hold_for_insurance && <span className="text-danger">{errors.hold_for_insurance}</span>}
                                     </div>
                                 </div>
-                                <div className="col-lg-3 col_form mb-3">
-                                    <div>
-                                        <label htmlFor="loan_status" className="form-label">
-                                            Loan Status
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="loan_status"
-                                            placeholder="Enter Loan Status"
-                                            className="form-control"
-                                            value={data.loan_status}
-                                            onChange={(e) => setData('loan_status', e.target.value)}
-                                        />
-                                    </div>
-                                </div>
+
                                 <div className="col-lg-3 col_form mb-3">
                                     <div>
                                         <label htmlFor="final_total_amount" className="form-label">
@@ -310,6 +310,7 @@ export default function Loan({ setData, data }) {
                                             value={data.final_total_amount}
                                             onChange={(e) => setData('final_total_amount', e.target.value)}
                                         />
+                                        {errors.final_total_amount && <span className="text-danger">{errors.final_total_amount}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-3 col_form mb-3">

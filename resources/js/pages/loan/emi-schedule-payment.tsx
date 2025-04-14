@@ -3,27 +3,33 @@ import AppLayout from '@/layouts/app-layout';
 import { Head, useForm, usePage } from '@inertiajs/react';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.css';
-import { FormEventHandler, useEffect, useRef } from 'react';
+import { FormEventHandler, useEffect, useRef, useState } from 'react';
 import EmiSchedule from './emi-schedule';
 
 export default function EmiSchedulePayment() {
-    const { loanApplication, emiSchedules } = usePage().props;
+    const { loanApplication, emiSchedules, totalPaid } = usePage().props;
 
     const emiDateInputRef = useRef(null);
 
+    const [emiStartDate, setEmiStartDate] = useState(loanApplication?.emi_start_date || '');
+
     useEffect(() => {
         // Initialize Flatpickr on the input element
-        flatpickr(emiDateInputRef.current, {
+        const fp = flatpickr(emiDateInputRef.current, {
             dateFormat: 'd-m-Y',
-            defaultDate: new Date(),
-            onChange: (selectedDates, dateStr) => {},
+            defaultDate: new Date(emiStartDate),
+            onChange: (selectedDates, dateStr) => {
+                setEmiStartDate(dateStr);
+                setData('start_date', dateStr);
+            },
         });
-    }, []);
+        return () => fp.destroy();
+    }, [emiStartDate]);
 
     // generate EMI schedule
     const { data, setData, post } = useForm({
-        loan_id: loanApplication.id,
-        start_date: '08-04-2025',
+        loan_id: loanApplication?.id,
+        start_date: emiStartDate,
     });
 
     const submit: FormEventHandler = (e) => {
@@ -178,7 +184,7 @@ export default function EmiSchedulePayment() {
                                 </div>
                             </div>
 
-                            <EmiSchedule emiSchedules={emiSchedules}></EmiSchedule>
+                            <EmiSchedule emiSchedules={emiSchedules} totalPaid={totalPaid}></EmiSchedule>
 
                             {/* Travel Expense Summary */}
                             <div className="flex_sections_bottom">

@@ -1,4 +1,4 @@
-export default function Vehicle({ setData, data }) {
+export default function Vehicle({ setData, data, errors }) {
     return (
         <>
             <div className="add_mrg_details_wrap">
@@ -22,6 +22,7 @@ export default function Vehicle({ setData, data }) {
                                             value={data.vehicle_type}
                                             onChange={(e) => setData('vehicle_type', e.target.value)}
                                         />
+                                        {errors.vehicle_type && <span className="text-danger">{errors.vehicle_type}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col_form mb-3">
@@ -37,6 +38,7 @@ export default function Vehicle({ setData, data }) {
                                             value={data.vehicle_registration_no}
                                             onChange={(e) => setData('vehicle_registration_no', e.target.value)}
                                         />
+                                        {errors.vehicle_registration_no && <span className="text-danger">{errors.vehicle_registration_no}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col_form mb-3">
@@ -52,6 +54,7 @@ export default function Vehicle({ setData, data }) {
                                             value={data.vehicle_registration_year}
                                             onChange={(e) => setData('vehicle_registration_year', e.target.value)}
                                         />
+                                        {errors.vehicle_registration_year && <span className="text-danger">{errors.vehicle_registration_year}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col_form mb-3">
@@ -67,6 +70,7 @@ export default function Vehicle({ setData, data }) {
                                             value={data.chasis_no}
                                             onChange={(e) => setData('chasis_no', e.target.value)}
                                         />
+                                        {errors.chasis_no && <span className="text-danger">{errors.chasis_no}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col_form mb-3">
@@ -82,6 +86,7 @@ export default function Vehicle({ setData, data }) {
                                             value={data.engine_no}
                                             onChange={(e) => setData('engine_no', e.target.value)}
                                         />
+                                        {errors.engine_no && <span className="text-danger">{errors.engine_no}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col_form mb-3">
@@ -97,6 +102,7 @@ export default function Vehicle({ setData, data }) {
                                             value={data.fuel_type}
                                             onChange={(e) => setData('fuel_type', e.target.value)}
                                         />
+                                        {errors.fuel_type && <span className="text-danger">{errors.fuel_type}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col_form mb-3">
@@ -112,6 +118,7 @@ export default function Vehicle({ setData, data }) {
                                             value={data.insurance_company_name}
                                             onChange={(e) => setData('insurance_company_name', e.target.value)}
                                         />
+                                        {errors.insurance_company_name && <span className="text-danger">{errors.insurance_company_name}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col_form mb-3">
@@ -126,6 +133,7 @@ export default function Vehicle({ setData, data }) {
                                             accept=".pdf,.jpg,.jpeg,.png"
                                             onChange={(e) => setData('rc_book', e.target.files[0])}
                                         />
+                                        {errors.rc_book && <span className="text-danger">{errors.rc_book}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col_form mb-3">
@@ -140,6 +148,7 @@ export default function Vehicle({ setData, data }) {
                                             accept=".pdf,.jpg,.jpeg,.png"
                                             onChange={(e) => setData('insurance_file', e.target.files[0])}
                                         />
+                                        {errors.insurance_file && <span className="text-danger">{errors.insurance_file}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col_form mb-3">
@@ -155,6 +164,7 @@ export default function Vehicle({ setData, data }) {
                                             value={data.dealer_name}
                                             onChange={(e) => setData('dealer_name', e.target.value)}
                                         />
+                                        {errors.dealer_name && <span className="text-danger">{errors.dealer_name}</span>}
                                     </div>
                                 </div>
                             </div>

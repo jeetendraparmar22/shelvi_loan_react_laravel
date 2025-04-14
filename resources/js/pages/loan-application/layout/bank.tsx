@@ -1,4 +1,4 @@
-export default function Bank({ setData, data }) {
+export default function Bank({ setData, data, errors }) {
     return (
         <>
             <div className="add_mrg_details_wrap">
@@ -22,6 +22,7 @@ export default function Bank({ setData, data }) {
                                             value={data.bank_account_holder_name}
                                             onChange={(e) => setData('bank_account_holder_name', e.target.value)}
                                         />
+                                        {errors.bank_account_holder_name && <span className="text-danger">{errors.bank_account_holder_name}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col_form mb-3">
@@ -37,6 +38,7 @@ export default function Bank({ setData, data }) {
                                             value={data.account_no}
                                             onChange={(e) => setData('account_no', e.target.value)}
                                         />
+                                        {errors.account_no && <span className="text-danger">{errors.account_no}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col_form mb-3">
@@ -52,6 +54,7 @@ export default function Bank({ setData, data }) {
                                             value={data.bank_name}
                                             onChange={(e) => setData('bank_name', e.target.value)}
                                         />
+                                        {errors.bank_name && <span className="text-danger">{errors.bank_name}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col_form mb-3">
@@ -67,6 +70,7 @@ export default function Bank({ setData, data }) {
                                             value={data.branch_name}
                                             onChange={(e) => setData('branch_name', e.target.value)}
                                         />
+                                        {errors.branch_name && <span className="text-danger">{errors.branch_name}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col_form mb-3">
@@ -82,6 +86,7 @@ export default function Bank({ setData, data }) {
                                             value={data.ifsc_code}
                                             onChange={(e) => setData('ifsc_code', e.target.value)}
                                         />
+                                        {errors.ifsc_code && <span className="text-danger">{errors.ifsc_code}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col_form mb-3">
@@ -97,6 +102,7 @@ export default function Bank({ setData, data }) {
                                             value={data.transfer_loan_amount}
                                             onChange={(e) => setData('transfer_loan_amount', e.target.value)}
                                         />
+                                        {errors.transfer_loan_amount && <span className="text-danger">{errors.transfer_loan_amount}</span>}
                                     </div>
                                 </div>
                             </div>

@@ -54,11 +54,11 @@ const AppSidebarLayout = () => {
                                                 <span>Application List</span>
                                             </Link>
                                         </li>
-                                        <li className="nav-item">
+                                        {/* <li className="nav-item">
                                             <Link href={route('loan.approved')} className="nav-link">
                                                 <span>Approved Loan</span>
                                             </Link>
-                                        </li>
+                                        </li> */}
                                     </ul>
                                 </div>
                             </li>

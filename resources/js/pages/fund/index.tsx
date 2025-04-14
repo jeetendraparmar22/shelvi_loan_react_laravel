@@ -78,7 +78,7 @@ export default function Inbox() {
                                                 <th>Amount</th>
                                                 <th>Balance</th>
 
-                                                <th>Action</th>
+                                                {/* <th>Action</th> */}
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -93,7 +93,7 @@ export default function Inbox() {
                                                     </td>
                                                     <td>{fund.balance}-INR</td>
 
-                                                    <td className="btns_actions">
+                                                    {/* <td className="btns_actions">
                                                         <button type="button" className="btn btn-sm btn-info waves-effect waves-light mr-1">
                                                             <i className="ri-pencil-line" /> Edit
                                                         </button>
@@ -101,7 +101,7 @@ export default function Inbox() {
                                                         <button type="button" className="btn btn-sm btn-danger waves-effect waves-light mr-1">
                                                             <i className="ri-recycle-line" /> Delete
                                                         </button>
-                                                    </td>
+                                                    </td> */}
                                                 </tr>
                                             ))}
                                             {/* <tr>

@@ -32,11 +32,15 @@ class LoanController extends Controller
 
         $emiSchedules = EmiSchedule::where('loan_id', $id)->get();
 
+        // Total amount paid
+        $totalPaid = EmiSchedule::where('loan_id', $id)->where('status', 'paid')->sum('emi_amount');
+
         return Inertia::render(
             'loan/emi-schedule-payment',
             [
                 'loanApplication' => $loanApplication,
                 'emiSchedules' => $emiSchedules,
+                'totalPaid' => $totalPaid,
             ]
         );
     }
@@ -75,12 +79,13 @@ class LoanController extends Controller
     // Update payment status
     public function updatePaymentStatus(Request $request, $id)
     {
+        $emi_payment_date = Carbon::createFromFormat('d-m-Y', $request->payment_date)->format('Y-m-d');
         $emiSchedule = EmiSchedule::findOrFail($id);
 
 
         $emiSchedule->update([
             'status' => 'paid',
-            'paid_date' => Carbon::now(),
+            'paid_date' => $emi_payment_date,
         ]);
 
         return to_route('loan.process', $emiSchedule->loan_id);
