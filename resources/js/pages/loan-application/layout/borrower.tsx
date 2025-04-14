@@ -1,4 +1,4 @@
-export default function Borrower({ setData, data }) {
+export default function Borrower({ setData, data, errors }) {
     return (
         <>
             <div className="add_mrg_details_wrap">
@@ -23,7 +23,7 @@ export default function Borrower({ setData, data }) {
                                             value={data.first_name}
                                             onChange={(e) => setData('first_name', e.target.value)}
                                         />
-                                        {/* {errors.borrower.first_name && <div className="text-danger">{errors.borrower.first_name}</div>} */}
+                                        {errors.first_name && <span className="text-danger">{errors.first_name}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col_form mb-3">
@@ -40,6 +40,7 @@ export default function Borrower({ setData, data }) {
                                             value={data.last_name}
                                             onChange={(e) => setData('last_name', e.target.value)}
                                         />
+                                        {errors.last_name && <span className="text-danger">{errors.last_name}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col_form mb-3">
@@ -56,6 +57,8 @@ export default function Borrower({ setData, data }) {
                                             value={data.surname}
                                             onChange={(e) => setData('surname', e.target.value)}
                                         />
+
+                                        {errors.surname && <span className="text-danger">{errors.surname}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col_form mb-3">
@@ -72,6 +75,7 @@ export default function Borrower({ setData, data }) {
                                             value={data.email}
                                             onChange={(e) => setData('email', e.target.value)}
                                         />
+                                        {errors.email && <span className="text-danger">{errors.email}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col_form mb-3">
@@ -88,6 +92,7 @@ export default function Borrower({ setData, data }) {
                                             value={data.mobile_no}
                                             onChange={(e) => setData('mobile_no', e.target.value)}
                                         />
+                                        {errors.mobile_no && <span className="text-danger">{errors.mobile_no}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col_form mb-3">
@@ -104,6 +109,7 @@ export default function Borrower({ setData, data }) {
                                             value={data.alternate_mobile_no}
                                             onChange={(e) => setData('alternate_mobile_no', e.target.value)}
                                         />
+                                        {errors.alternate_mobile_no && <span className="text-danger">{errors.alternate_mobile_no}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-4 col_form mb-3">
@@ -120,6 +126,7 @@ export default function Borrower({ setData, data }) {
                                             value={data.adhar_card}
                                             onChange={(e) => setData('adhar_card', e.target.value)}
                                         />
+                                        {errors.adhar_card && <span className="text-danger">{errors.adhar_card}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-12 col_form mb-3">
@@ -136,6 +143,7 @@ export default function Borrower({ setData, data }) {
                                             value={data.remark_customer_detail}
                                             onChange={(e) => setData('remark_customer_detail', e.target.value)}
                                         ></textarea>
+                                        {errors.remark_customer_detail && <span className="text-danger">{errors.remark_customer_detail}</span>}
                                     </div>
                                 </div>
                             </div>

@@ -1,6 +1,6 @@
 import AppInnerPage from '@/components/app-inner-page';
 import AppLayout from '@/layouts/app-layout';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, usePage } from '@inertiajs/react';
 import Address from './layout/address';
 import Bank from './layout/bank';
 import Borrower from './layout/borrower';
@@ -8,7 +8,9 @@ import Loan from './layout/loan';
 import Vehicle from './layout/vehicle';
 
 export default function Create() {
-    const { data, setData, post, processing, errors } = useForm({
+    const { errors } = usePage().props;
+
+    const { data, setData, post, processing } = useForm({
         first_name: '',
         last_name: '',
         surname: '',
@@ -18,7 +20,7 @@ export default function Create() {
         adhar_card: '',
         remark_customer_detail: '',
         address: '',
-        country: '',
+        country: 'India',
         state: '',
         city: '',
         village: '',
@@ -34,8 +36,8 @@ export default function Create() {
         insurance_file: null,
         dealer_name: '',
         file_log_in_date: '',
-        finance_name: '',
-        finance_address: '',
+        finance_name: 'Shelvi Financial Services',
+        finance_address: 'Himmmatnagar,Sabarkantha,Gujarat',
         executive_name: '',
         loan_amount: '',
         emi: '',
@@ -88,11 +90,11 @@ export default function Create() {
                         <div className="mrg_salary_wrapper">
                             <div className="pt-3 pr-1 pb-3 pl-1">
                                 <form onSubmit={handleSubmit}>
-                                    <Borrower setData={setData} data={data} />
-                                    <Address setData={setData} data={data} />
-                                    <Vehicle setData={setData} data={data} />
-                                    <Loan setData={setData} data={data} />
-                                    <Bank setData={setData} data={data} />
+                                    <Borrower setData={setData} data={data} errors={errors} />
+                                    <Address setData={setData} data={data} errors={errors} />
+                                    <Vehicle setData={setData} data={data} errors={errors} />
+                                    <Loan setData={setData} data={data} errors={errors} />
+                                    <Bank setData={setData} data={data} errors={errors} />
                                     <div className="hstack mb-lg-0 justify-content-center mt-0 mb-3 flex-wrap gap-2">
                                         <button type="submit" className="btn btn-green btn-border" disabled={processing}>
                                             {processing ? 'Submitting...' : 'Submit'}

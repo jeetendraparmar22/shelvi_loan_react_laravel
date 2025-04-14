@@ -2,12 +2,11 @@ import { useForm } from '@inertiajs/react';
 import flatpickr from 'flatpickr';
 import { useEffect, useRef, useState } from 'react';
 
-export default function EmiSchedule({ emiSchedules = [] }) {
+export default function EmiSchedule({ emiSchedules = [], totalPaid = 0 }) {
     const [paymentDate, setPaymentDate] = useState('');
-    const [selectedEmi, setSelectedEmi] = useState(null); // Store the selected EMI schedule
-    const [penalty, setPenalty] = useState(0); // Store the calculated penalty
-    const [totalAmount, setTotalAmount] = useState(0); // Store the total amount (EMI + penalty)
-
+    const [selectedEmi, setSelectedEmi] = useState(null);
+    const [penalty, setPenalty] = useState(0);
+    const [totalAmount, setTotalAmount] = useState(0);
     const { data, setData, post, processing, errors } = useForm({
         id: '',
         payment_date: '',
@@ -124,14 +123,14 @@ export default function EmiSchedule({ emiSchedules = [] }) {
                         <div className="total_tbl_wrap">
                             <h5>Grand Total</h5>
                             <h5>:</h5>
-                            <h6>25000</h6>
+                            <h6>{totalPaid}</h6>
                         </div>
                     </div>
                 </div>
             </div>
             {/* EMI Details */}
 
-            <div id="payment_status_modal" className="modal fade" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div id="payment_status_modal" className="modal fade" tabIndex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
                         <div className="modal-header">

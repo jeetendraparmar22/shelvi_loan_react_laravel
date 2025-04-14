@@ -1,4 +1,4 @@
-export default function Address({ setData, data }) {
+export default function Address({ setData, data, errors }) {
     return (
         <>
             <div className="add_mrg_details_wrap">
@@ -23,24 +23,10 @@ export default function Address({ setData, data }) {
                                             value={data.address}
                                             onChange={(e) => setData('address', e.target.value)}
                                         ></textarea>
+                                        {errors.address && <span className="text-danger">{errors.address}</span>}
                                     </div>
                                 </div>
-                                <div className="col-lg-6 col_form mb-3">
-                                    <div>
-                                        <label htmlFor="country" className="form-label">
-                                            Country
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="country"
-                                            name="country"
-                                            placeholder="Enter Country"
-                                            className="form-control"
-                                            value={data.country}
-                                            onChange={(e) => setData('country', e.target.value)}
-                                        />
-                                    </div>
-                                </div>
+
                                 <div className="col-lg-6 col_form mb-3">
                                     <div>
                                         <label htmlFor="state" className="form-label">
@@ -55,6 +41,7 @@ export default function Address({ setData, data }) {
                                             value={data.state}
                                             onChange={(e) => setData('state', e.target.value)}
                                         />
+                                        {errors.state && <span className="text-danger">{errors.state}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-6 col_form mb-3">
@@ -71,6 +58,7 @@ export default function Address({ setData, data }) {
                                             value={data.city}
                                             onChange={(e) => setData('city', e.target.value)}
                                         />
+                                        {errors.city && <span className="text-danger">{errors.city}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-6 col_form mb-3">
@@ -87,6 +75,7 @@ export default function Address({ setData, data }) {
                                             value={data.village}
                                             onChange={(e) => setData('village', e.target.value)}
                                         />
+                                        {errors.village && <span className="text-danger">{errors.village}</span>}
                                     </div>
                                 </div>
                                 <div className="col-lg-6 col_form mb-3">
@@ -103,6 +92,7 @@ export default function Address({ setData, data }) {
                                             value={data.pincode}
                                             onChange={(e) => setData('pincode', e.target.value)}
                                         />
+                                        {errors.pincode && <span className="text-danger">{errors.pincode}</span>}
                                     </div>
                                 </div>
                             </div>
