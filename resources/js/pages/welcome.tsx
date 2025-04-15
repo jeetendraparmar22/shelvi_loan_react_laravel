@@ -30,12 +30,12 @@ export default function Welcome() {
                             </div>
                         </div>
                         <div className="images_login">
-                            <img src="/assets/images/hotel.svg" alt="login image" className="pos_hotel pos_img" />
+                            <img src="/assets/images/business-plan.png" alt="login image" className="pos_hotel pos_img" />
                             <img src="/assets/images/plane.svg" alt="login image" className="pos_plane pos_img" />
                             <img src="/assets/images/fly-plane.svg" alt="login image" className="pos_flyplane pos_img" />
                             <img src="/assets/images/train.svg" alt="login image" className="pos_train pos_img" />
-                            <img src="/assets/images/couple.svg" alt="login image" className="pos_couple pos_img" />
-                            <img src="/assets/images/tourist.svg" alt="login image" className="pos_tourist pos_img" />
+                            <img src="/assets/images/couple.png" alt="login image" className="pos_couple pos_img" />
+                            <img src="/assets/images/insurance.png" alt="login image" className="pos_tourist pos_img" />
                         </div>
                         {/* end row */}
                     </div>
