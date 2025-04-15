@@ -26,6 +26,8 @@ Route::get('loan/process/{id}', [LoanController::class, 'show'])->name('loan.pro
 Route::post('emi-schedule/generate', [LoanController::class, 'generateEmiSchedule'])->name('emi-schedule.generate');
 Route::post('payment-status/update/{id}', [LoanController::class, 'updatePaymentStatus'])->name('payment-status.update');
 
+Route::get('download-receipt/{id}', [LoanController::class, 'downloadReceipt'])->name('download.receipt');
+
 
 
 require __DIR__ . '/settings.php';

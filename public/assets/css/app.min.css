@@ -19802,7 +19802,7 @@ span.counter-value {
     }
 
     .pos_couple {
-        width: 146px;
+        width: 100px;
         right: 96px;
         top: 36px;
     }
@@ -20966,7 +20966,7 @@ span.counter-value {
         bottom: 0;
         left: 0;
         position: fixed !important;
-        width: 300px;
+        width: 200px;
     }
 
     .total_wrap {
@@ -20998,14 +20998,14 @@ span.counter-value {
     .pos_couple {
         left: 398px;
         top: 150px;
-        width: 369px;
+        width: 250px;
     }
 
     .pos_tourist {
         top: 233px;
         left: 0;
         position: fixed !important;
-        width: 338px;
+        width: 250px;
     }
 
     .col_login {

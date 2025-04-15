@@ -94,9 +94,11 @@ export default function EmiSchedule({ emiSchedules = [], totalPaid = 0 }) {
                                             </td>
 
                                             <td>
-                                                <a href="javascript:void(0)" className="pdf_icon">
-                                                    <img src="/assets/images/svg/pdf.svg" alt="pdf icon" className="img-fluid" />
-                                                </a>
+                                                {emiSchedule.status === 'paid' && (
+                                                    <a href={route('download.receipt', emiSchedule.id)} className="pdf_icon">
+                                                        <img src="/assets/images/svg/pdf.svg" alt="pdf icon" className="img-fluid" />
+                                                    </a>
+                                                )}
                                             </td>
                                             <td>
                                                 <button
