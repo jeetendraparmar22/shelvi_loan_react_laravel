@@ -168,6 +168,7 @@ class LoanApplicationController extends Controller
                 'rto_charge' => $request->rto_charge,
                 'hold_for_insurance' => $request->hold_for_insurance,
                 'loan_status' => 'pending',
+                'outstanding_principal_amount' => $request->loan_amount,
             ]);
 
 
