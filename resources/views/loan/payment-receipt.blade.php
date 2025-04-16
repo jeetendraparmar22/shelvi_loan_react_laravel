@@ -135,7 +135,7 @@
             <h1>EMI Paid Receipt</h1>
             <p>Shelvi Financial Services</p>
             <p>Himmatnagar,Sabarkantha, Gujarat,India</p>
-            <p>Email: contact@shelviloans.com | Phone: (123) 456-7890</p>
+            <p>Email: contact@shelvifinancial.in | Phone: +91-9898105656</p>
         </div>
 
         <div class="details">
@@ -171,7 +171,7 @@
                     </tbody>
                 </table>
                 <div class="total">
-                    <p>Total Paid: {{ $emiSchedule->emi_amount + $emiSchedule->penalty }} -INR</p>
+                    <p>Total Paid: {{ $emiSchedule->emi_amount + $emiSchedule->penalty }}-INR</p>
                 </div>
             </div>
         </div>

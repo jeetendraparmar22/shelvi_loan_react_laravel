@@ -56,12 +56,19 @@ class LoanController extends Controller
         // Total amount paid
         $totalPaid = EmiSchedule::where('loan_id', $id)->where('status', 'paid')->sum('emi_amount');
 
+        // Total amount emi paid
+        $total_emi_paid = EmiSchedule::where('loan_id', $id)->where('status', 'paid')->count();
+        // Total amount emi unpaid
+        $total_emi_unpaid = EmiSchedule::where('loan_id', $id)->where('status', 'unpaid')->count();
+
         return Inertia::render(
             'loan/emi-schedule-payment',
             [
                 'loanApplication' => $loanApplication,
                 'emiSchedules' => $emiSchedules,
                 'totalPaid' => $totalPaid,
+                'total_emi_paid' => $total_emi_paid,
+                'total_emi_unpaid' => $total_emi_unpaid,
             ]
         );
     }

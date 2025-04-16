@@ -7,7 +7,7 @@ import { FormEventHandler, useEffect, useRef, useState } from 'react';
 import EmiSchedule from './emi-schedule';
 
 export default function EmiSchedulePayment() {
-    const { loanApplication, emiSchedules, totalPaid } = usePage().props;
+    const { loanApplication, emiSchedules, totalPaid, total_emi_paid, total_emi_unpaid } = usePage().props;
 
     const emiDateInputRef = useRef(null);
 
@@ -163,17 +163,19 @@ export default function EmiSchedulePayment() {
                                         </div>
                                         <div className="col-lg-4 pr-0 pl-0">
                                             <div className="attached_btns mt-4">
-                                                <button
-                                                    className="btn btn-info btn-border mr-2"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#emi_scheduler"
-                                                    type="button"
-                                                >
-                                                    EMI Schedule
-                                                </button>
-                                                <button className="btn btn-info btn-border" type="button">
+                                                {loanApplication.loan.loan_status === 'approved' ? (
+                                                    <button
+                                                        className="btn btn-info btn-border mr-2"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#emi_scheduler"
+                                                        type="button"
+                                                    >
+                                                        EMI Schedule
+                                                    </button>
+                                                ) : null}
+                                                {/* <button className="btn btn-info btn-border" type="button">
                                                     Loan Agreement
-                                                </button>
+                                                </button> */}
                                             </div>
                                             {/* <div class="attached_btns mt-2">
                                                 <button class="btn btn-primary  mt-2 btn-border mr-3" type="button">Special Approval For TR/752269</button>
@@ -203,56 +205,37 @@ export default function EmiSchedulePayment() {
                                                             Total Loan
                                                         </th>
                                                         <th>:</th>
-                                                        <td>1400</td>
+                                                        <td>{loanApplication.loan.loan_amount}-INR</td>
                                                     </tr>
                                                     <tr>
                                                         <th className="ps-0" scope="row">
-                                                            Total Paid
-                                                        </th>
-                                                        <th>:</th>
-                                                        <td>00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th className="ps-0" scope="row">
-                                                            Paid By Self
-                                                        </th>
-                                                        <th>:</th>
-                                                        <td>00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th className="ps-0" scope="row">
-                                                            DA
-                                                        </th>
-                                                        <th>:</th>
-                                                        <td>00</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th className="ps-0" scope="row">
-                                                            Travel Advance
+                                                            Total Paid Amount
                                                         </th>
                                                         <th>:</th>
                                                         <td>
-                                                            <div className="d-flex">
-                                                                <p className="mr-2 mb-0">10</p>
-                                                                <a
-                                                                    href="#"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#edit_value"
-                                                                    className="btn btn_edit ml-2"
-                                                                >
-                                                                    <i className="ri-pencil-line" />
-                                                                </a>
-                                                            </div>
+                                                            {loanApplication.loan.loan_amount - loanApplication.loan.outstanding_principal_amount}-INR
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <th className="ps-0" scope="row">
-                                                            Pay to Employee
+                                                            Paid EMI
                                                         </th>
                                                         <th>:</th>
-                                                        <td>
-                                                            <strong>00</strong>
-                                                        </td>
+                                                        <td>{total_emi_paid}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th className="ps-0" scope="row">
+                                                            Remaining EMI
+                                                        </th>
+                                                        <th>:</th>
+                                                        <td>{total_emi_unpaid}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th className="ps-0" scope="row">
+                                                            Total Remaining Amount
+                                                        </th>
+                                                        <th>:</th>
+                                                        <td>{loanApplication.loan.outstanding_principal_amount}-INR</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -264,12 +247,12 @@ export default function EmiSchedulePayment() {
                                     <button className="btn btn-green btn-border" data-bs-toggle="modal" data-bs-target="#approve_task_modal">
                                         NOC
                                     </button>
-                                    <button className="btn btn-danger btn-border" data-bs-toggle="modal" data-bs-target="#Clarify_modal">
+                                    {/* <button className="btn btn-danger btn-border" data-bs-toggle="modal" data-bs-target="#Clarify_modal">
                                         Agreement
-                                    </button>
+                                    </button> */}
                                 </div>
                                 <div className="section_acc travel_summary_wrapper approved_by_wrapper">
-                                    <div className="bg_sec_header">
+                                    {/* <div className="bg_sec_header">
                                         <div className="d-flex align-items-center">
                                             <h5>Approved By</h5>
                                         </div>
@@ -323,7 +306,7 @@ export default function EmiSchedulePayment() {
                                                 </tbody>
                                             </table>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>
