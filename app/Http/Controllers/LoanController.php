@@ -11,10 +11,65 @@ use App\Models\LoanApplication;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 use Inertia\Inertia;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class LoanController extends Controller
 {
+    // No due certificate
+    public function noDueCertificate($id)
+    {
+        $loan_data = Borrower::with('vehicle', 'loan', 'address')->findOrFail($id);
+        try {
+            // Create the signed URL for NOC verification
+            $url = config('app.url') . "/verify-noc?loan_id=" . $id;
+
+            // Define filename and path
+            $filename = 'qr_codes/noc_loan_' . 19 . '.png';
+
+            // Generate QR code as image binary
+            $qrImage = QrCode::format('png')->size(100)->generate($url);
+
+            // Save to storage (e.g., public disk)
+            Storage::disk('public')->put($filename, $qrImage);
+            // Get full URL to display QR code
+            $qrCodeDataUri = 'data:image/png;base64,' . base64_encode(Storage::disk('public')->get($filename));
+
+            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('noc.no-due-certificate', compact('loan_data', 'qrCodeDataUri'));
+            $pdf->setPaper('A4', 'portrait');
+
+            return response()->streamDownload(
+                function () use ($pdf) {
+                    echo $pdf->output();
+                },
+                'no_due_certificate_' . $id . '.pdf'
+            );
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
+
+    // Force closer emi payment
+    public function forceCloser($id)
+    {
+
+        $loan_data = Borrower::with('vehicle', 'loan', 'address')->findOrFail($id);
+        try {
+            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('loan.force-closer', compact('loan_data'));
+            $pdf->setPaper('A4', 'portrait');
+
+            return response()->streamDownload(
+                function () use ($pdf) {
+                    echo $pdf->output();
+                },
+                'force_closer_letter_' . $id . '.pdf'
+            );
+        } catch (\Exception $e) {
+            return back()->withErrors(['error' => $e->getMessage()]);
+        }
+    }
 
     // Download receipt
     public function downloadReceipt($id)

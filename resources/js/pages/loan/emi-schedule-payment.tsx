@@ -243,10 +243,12 @@ export default function EmiSchedulePayment() {
                                     </div>
                                 </div>
                                 <div className="btn_invoices_flex">
-                                    <button className="btn btn-info">Force Closer Letter</button>
-                                    <button className="btn btn-green btn-border" data-bs-toggle="modal" data-bs-target="#approve_task_modal">
+                                    <a href={route('force.closer', loanApplication.id)} className="btn btn-info">
+                                        Force Closer Letter
+                                    </a>
+                                    <a href={route('no.due.certificate', loanApplication.id)} className="btn btn-green btn-border">
                                         NOC
-                                    </button>
+                                    </a>
                                     {/* <button className="btn btn-danger btn-border" data-bs-toggle="modal" data-bs-target="#Clarify_modal">
                                         Agreement
                                     </button> */}
