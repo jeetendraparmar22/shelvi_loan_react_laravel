@@ -12,6 +12,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
+use Illuminate\Support\Str;
+
 
 class LoanApplicationController extends Controller
 {
@@ -152,6 +154,7 @@ class LoanApplicationController extends Controller
             // Create Loan
             Loan::create([
                 'borrower_id' => $borrower->id,
+                'uuid' => Str::uuid()->getHex(),
                 'vehicle_id' => $vehicle->id,
                 'file_log_in_date' => $request->file_log_in_date,
                 'finance_name' => $request->finance_name,

@@ -6,7 +6,7 @@ import FundModal from './fund-modal';
 
 export default function Inbox() {
     const { funds } = usePage().props;
-    const { data, setData, post, processing, errors } = useForm({
+    const { data, setData, post } = useForm({
         payment_type: '',
         amount: '',
         description: '',

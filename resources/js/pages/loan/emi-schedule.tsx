@@ -7,7 +7,7 @@ export default function EmiSchedule({ emiSchedules = [], totalPaid = 0 }) {
     const [selectedEmi, setSelectedEmi] = useState(null);
     const [penalty, setPenalty] = useState(0);
     const [totalAmount, setTotalAmount] = useState(0);
-    const { data, setData, post, processing, errors } = useForm({
+    const { setData, post } = useForm({
         id: '',
         payment_date: '',
     });

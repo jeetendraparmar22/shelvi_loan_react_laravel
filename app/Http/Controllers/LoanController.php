@@ -18,13 +18,26 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class LoanController extends Controller
 {
+
+    // Verify NOC
+    public function verifyNoc($id, $uuid)
+    {
+        $loan_data = Borrower::with('vehicle', 'loan', 'address')->findOrFail($id);
+        if ($loan_data->loan->uuid == $uuid) {
+            return view('noc.noc-verify', [
+                'loan_data' => $loan_data,
+            ]);
+        } else {
+            return view('noc.noc-unverify');
+        }
+    }
     // No due certificate
     public function noDueCertificate($id)
     {
         $loan_data = Borrower::with('vehicle', 'loan', 'address')->findOrFail($id);
         try {
             // Create the signed URL for NOC verification
-            $url = config('app.url') . "/verify-noc?loan_id=" . $id;
+            $url = config('app.url') . "/verify-noc/" . $id . "/" . $loan_data->loan->uuid;
 
             // Define filename and path
             $filename = 'qr_codes/noc_loan_' . 19 . '.png';
@@ -39,6 +52,7 @@ class LoanController extends Controller
 
             $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('noc.no-due-certificate', compact('loan_data', 'qrCodeDataUri'));
             $pdf->setPaper('A4', 'portrait');
+
 
             return response()->streamDownload(
                 function () use ($pdf) {
