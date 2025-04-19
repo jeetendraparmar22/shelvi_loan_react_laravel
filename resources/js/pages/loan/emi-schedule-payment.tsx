@@ -27,7 +27,7 @@ export default function EmiSchedulePayment() {
     }, [emiStartDate]);
 
     // generate EMI schedule
-    const { data, setData, post } = useForm({
+    const { setData, post } = useForm({
         loan_id: loanApplication?.id,
         start_date: emiStartDate,
     });
@@ -39,7 +39,7 @@ export default function EmiSchedulePayment() {
             onSuccess: (response) => {
                 console.log('EMI schedule generated successfully:', response);
             },
-            onError: (errors: any) => {
+            onError: (errors) => {
                 console.error('Error generating EMI schedule:', errors);
             },
         });
