@@ -126,9 +126,7 @@ export default function Dashboard() {
                                                     </div>
                                                     <div className="col-md-9">
                                                         <div className="card card-primary">
-                                                            <div className="card-body p-0">
-                                                                <div id="calendar"></div>
-                                                            </div>
+                                                            <div className="card-body p-0">{/* <div id="calendar"></div> */}</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -204,12 +202,13 @@ export default function Dashboard() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-xl-6 col-md-12">
+                                    <div className="col-xl-12 col-md-12">
                                         <div className="card">
-                                            <h5 className="card-title mt-3 mr-2 mb-0 ml-3">Team Mate's Loan</h5>
+                                            <h5 className="card-title mt-3 mr-2 mb-0 ml-3">Calender</h5>
                                             <div className="card-body">
                                                 <div className="row">
-                                                    <div className="col-lg-4 col-md-4">
+                                                    <div id="calendar"></div>
+                                                    {/* <div className="col-lg-4 col-md-4">
                                                         <div className="card card-animate bg-info mb-2">
                                                             <div className="card-body">
                                                                 <div className="d-flex align-items-center">
@@ -283,12 +282,12 @@ export default function Dashboard() {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> */}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-xl-6 col-md-12">
+                                    {/* <div className="col-xl-6 col-md-12">
                                         <div className="card">
                                             <h5 className="card-title mt-3 mr-2 mb-0 ml-3">Your Salary Advance</h5>
                                             <div className="card-body">
@@ -371,7 +370,7 @@ export default function Dashboard() {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>

@@ -29,5 +29,7 @@ Route::get('download-receipt/{id}', [LoanController::class, 'downloadReceipt'])-
 Route::get('force-closer/{id}', [LoanController::class, 'forceCloser'])->name('force.closer');
 Route::get('no-due-certificate/{id}', [LoanController::class, 'noDueCertificate'])->name('no.due.certificate');
 
+Route::get('verify-noc/{id}/{uuid}', [LoanController::class, 'verifyNoc'])->name('verify.noc');
+
 require __DIR__ . '/settings.php';
 require __DIR__ . '/auth.php';

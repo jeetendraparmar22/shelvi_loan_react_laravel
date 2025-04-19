@@ -1,6 +1,7 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 
 const AppHeaderLayout = () => {
+    const { auth } = usePage().props;
     return (
         <>
             <header id="page-topbar">
@@ -273,25 +274,21 @@ const AppHeaderLayout = () => {
                                             alt="Header Avatar"
                                         />
                                         <span className="ms-xl-2 text-start">
-                                            <span className="d-none d-xl-inline-block fw-medium user-name-text ms-1">Jigar Suthar</span>
+                                            <span className="d-none d-xl-inline-block fw-medium user-name-text ms-1">{auth.user.name}</span>
                                         </span>
                                     </span>
                                 </button>
                                 <div className="dropdown-menu dropdown-menu-end">
                                     {/* item*/}
-                                    <a className="dropdown-item" href="pages-profile.html">
+                                    <a className="dropdown-item" href="#">
                                         <i className="mdi mdi-account-circle text-muted fs-16 me-1 align-middle" />{' '}
                                         <span className="align-middle">Profile</span>
                                     </a>
-                                    <a className="dropdown-item" href="https://s.bhaskarmail.com/" target="_blank">
+                                    <a className="dropdown-item" href="#">
                                         <i className="mdi mdi-lock text-muted fs-16 me-1 align-middle" />{' '}
                                         <span className="align-middle">Change Password</span>
                                     </a>
-                                    <a
-                                        className="dropdown-item"
-                                        href="https://sites.google.com/dbcorp.in/mytravel/welcome?authuser=0"
-                                        target="_blank"
-                                    >
+                                    <a className="dropdown-item" href="#">
                                         <i className="bx bx-book-open text-muted fs-16 me-1 align-middle" />{' '}
                                         <span className="align-middle">User Manual</span>
                                     </a>

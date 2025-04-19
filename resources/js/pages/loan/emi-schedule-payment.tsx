@@ -173,9 +173,9 @@ export default function EmiSchedulePayment() {
                                                         EMI Schedule
                                                     </button>
                                                 ) : null}
-                                                {/* <button className="btn btn-info btn-border" type="button">
-                                                    Loan Agreement
-                                                </button> */}
+                                                <button className="btn btn-danger btn-border" type="button">
+                                                    Close Loan
+                                                </button>
                                             </div>
                                             {/* <div class="attached_btns mt-2">
                                                 <button class="btn btn-primary  mt-2 btn-border mr-3" type="button">Special Approval For TR/752269</button>
