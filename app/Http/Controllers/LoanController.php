@@ -197,6 +197,7 @@ class LoanController extends Controller
         $emiSchedule->update([
             'status' => 'paid',
             'paid_date' => $emi_payment_date,
+            'penalty' => $request->penalty,
         ]);
 
 

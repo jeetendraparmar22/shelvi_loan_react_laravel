@@ -1,0 +1,1 @@
+import{r as a,j as t,L as r}from"./app-B_F5sqf3.js";import{A as s}from"./app-layout-C4xbKidB.js";function p(){const[o,l]=a.useState(new Date().getFullYear());for(let e=2020;e<=new Date().getFullYear();e++);return t.jsx(s,{children:t.jsx(r,{title:"Dashboard"})})}export{p as default};
