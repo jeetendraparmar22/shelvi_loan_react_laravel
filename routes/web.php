@@ -17,7 +17,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 require __DIR__ . '/funds.php';
 
-// Loan application routes
+// Loan application routes with resource controller
 Route::resource('loan-applications', App\Http\Controllers\LoanApplication\LoanApplicationController::class);
 
 // Loan routes
