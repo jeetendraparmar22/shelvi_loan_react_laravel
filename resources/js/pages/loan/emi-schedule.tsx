@@ -5,16 +5,21 @@ import { useEffect, useRef, useState } from 'react';
 export default function EmiSchedule({ emiSchedules = [], totalPaid = 0 }) {
     const [paymentDate, setPaymentDate] = useState('');
     const [selectedEmi, setSelectedEmi] = useState(null);
-    const [penalty, setPenalty] = useState(0);
+    const [penalty, setPenalty] = useState(''); // Initialize penalty as an empty string
     const [totalAmount, setTotalAmount] = useState(0);
     const { setData, post } = useForm({
         id: '',
         payment_date: '',
+        penalty: 0,
     });
 
     const paymentStatus = () => {
         if (selectedEmi) {
-            setData('id', selectedEmi.id);
+            setData({
+                id: selectedEmi.id,
+                payment_date: paymentDate,
+                penalty: parseFloat(penalty) || 0, // Ensure penalty is sent as a number
+            });
             post(route('payment-status.update', selectedEmi.id));
         }
     };
@@ -26,23 +31,11 @@ export default function EmiSchedule({ emiSchedules = [], totalPaid = 0 }) {
             // Set payment date from due_date
             setPaymentDate(selectedEmi.due_date);
 
-            // Calculate penalty if the payment is overdue
-            const dueDate = new Date(selectedEmi.due_date);
-            const currentDate = new Date();
-            const isOverdue = currentDate > dueDate;
-
-            if (isOverdue) {
-                const daysOverdue = Math.ceil((currentDate - dueDate) / (1000 * 60 * 60 * 24)); // Calculate days overdue
-                const calculatedPenalty = daysOverdue * 50; // Example penalty: 50 INR per day
-                setPenalty(calculatedPenalty);
-            } else {
-                setPenalty(0);
-            }
-
-            // Calculate total amount (EMI + penalty)
-            setTotalAmount(selectedEmi.emi_amount + penalty);
+            // Reset penalty and set initial total amount
+            setPenalty(''); // Reset penalty to an empty string
+            setTotalAmount(selectedEmi.emi_amount); // Initial total amount is just the EMI amount
         }
-    }, [selectedEmi, penalty]);
+    }, [selectedEmi]);
 
     useEffect(() => {
         flatpickr(paymentStatusDateRef.current, {
@@ -54,6 +47,15 @@ export default function EmiSchedule({ emiSchedules = [], totalPaid = 0 }) {
             },
         });
     }, [paymentDate]);
+
+    // Update total amount whenever penalty changes
+    useEffect(() => {
+        if (selectedEmi) {
+            // Ensure penalty is parsed as a number
+            const parsedPenalty = parseFloat(penalty) || 0; // Default to 0 if penalty is empty or invalid
+            setTotalAmount(parseFloat(selectedEmi.emi_amount) + parsedPenalty); // Add EMI and penalty as numbers
+        }
+    }, [penalty, selectedEmi]);
 
     return (
         <>
@@ -153,7 +155,12 @@ export default function EmiSchedule({ emiSchedules = [], totalPaid = 0 }) {
                                             <input type="number" value={selectedEmi?.emi_amount || 0} className="form-control" readOnly />
 
                                             <label className="form-label">Penalty</label>
-                                            <input type="number" value={penalty} className="form-control" readOnly />
+                                            <input
+                                                type="number"
+                                                value={penalty}
+                                                className="form-control"
+                                                onChange={(e) => setPenalty(e.target.value)} // Update penalty dynamically
+                                            />
 
                                             <label className="form-label">Total Amount (EMI + Penalty)</label>
                                             <input type="number" value={totalAmount} className="form-control" readOnly />
